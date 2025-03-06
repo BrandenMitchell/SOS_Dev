@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,11 +139,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GeneralGame.cpp" />
+    <ClCompile Include="SimpleMode.cpp" />
+    <ClCompile Include="RadioButton.cpp" />
+    <ClCompile Include="RadioButtonGroup.cpp" />
+    <ClCompile Include="SFMLSOS.cpp" />
     <ClCompile Include="SMFLAttempt3.cpp" />
     <ClCompile Include="Test.cpp" />
+    <ClCompile Include="UI_Label.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameMode.h" />
+    <ClInclude Include="GeneralGame.h" />
+    <ClInclude Include="GridClass.h" />
+    <ClInclude Include="RadioButton.h" />
+    <ClInclude Include="RadioButtonGroup.h" />
+    <ClInclude Include="SFMLSOS.h" />
+    <ClInclude Include="SimpleMode.h" />
     <ClInclude Include="SMFLAttempt3.h" />
+    <ClInclude Include="UI_Label.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
