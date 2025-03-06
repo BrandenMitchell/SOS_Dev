@@ -162,18 +162,77 @@ int main(){
 				
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				
-				ThreeByThree.handleClick(mousePos.x, mousePos.y);
+			/*	ThreeByThree.handleClick(mousePos.x, mousePos.y);
 				FiveByFive.handleClick(mousePos.x, mousePos.y);
-				SevenBySeven.handleClick(mousePos.x, mousePos.y);
+				SevenBySeven.handleClick(mousePos.x, mousePos.y);*/
+
 				if (SimpleGameBtn.handleClick(event.mouseButton.x, event.mouseButton.y)) {
 					// Ensure only one button is active at a time
 					GeneralGameBtn.setState(false);
 					GeneralGameBtn.setInnerColor("Transparent");
+					SimpleLabel.set_labelColor("Green");
+					GeneralLabel.set_labelColor("Cyan");
+
+
 				}
 				else if (GeneralGameBtn.handleClick(event.mouseButton.x, event.mouseButton.y)) {
 					SimpleGameBtn.setState(false);
 					SimpleGameBtn.setInnerColor("Transparent");
+					SimpleLabel.set_labelColor("White");
+
+					GeneralLabel.set_labelColor("Green");
+
 				}
+				if (!SimpleGameBtn.getState()) {
+					SimpleLabel.set_labelColor("White");
+
+				}
+				if (!GeneralGameBtn.getState()) {
+					GeneralLabel.set_labelColor("Cyan");
+
+				}
+
+
+				if (ThreeByThree.handleClick(mousePos.x, mousePos.y)) {
+					// Ensure only one button is active at a time
+					SevenBySeven.setState(false);
+					FiveByFive.setState(false);
+					SevenBySeven.setInnerColor("Transparent");
+					FiveByFive.setInnerColor("Transparent");
+					ThreebyLabel.set_labelColor("White");
+
+
+				}
+				else if (FiveByFive.handleClick(mousePos.x, mousePos.y)) {
+					SevenBySeven.setState(false);
+					ThreeByThree.setState(false);
+					SevenBySeven.setInnerColor("Transparent");
+					ThreeByThree.setInnerColor("Transparent");
+					FivebyLabel.set_labelColor("White");
+
+				
+				}
+				else if (SevenBySeven.handleClick(mousePos.x, mousePos.y)) {
+					FiveByFive.setState(false);
+					ThreeByThree.setState(false);
+					FiveByFive.setInnerColor("Transparent");
+					ThreeByThree.setInnerColor("Transparent");
+					SevenbyLabel.set_labelColor("White");
+
+				}
+				if (!ThreeByThree.getState()) {
+					ThreebyLabel.set_labelColor("Magenta");
+
+				}
+				if (!FiveByFive.getState()) {
+					FivebyLabel.set_labelColor("Red");
+
+				}
+				if (!SevenBySeven.getState()) {
+					SevenbyLabel.set_labelColor("Yellow");
+
+				}
+				
 
 				
 					
