@@ -3,6 +3,7 @@
 #define GeneralGame_H
 
 #include "GameMode.h"
+#include "GridClass.h"
 
 class GeneralMode : public GameMode {
 

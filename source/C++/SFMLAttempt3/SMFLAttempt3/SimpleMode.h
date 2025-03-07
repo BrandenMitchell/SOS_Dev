@@ -3,6 +3,7 @@
 #define SimpleMode_H
 
 #include "GameMode.h"
+#include "GridClass.h"
 
 class SimpleMode : public GameMode  {
 		

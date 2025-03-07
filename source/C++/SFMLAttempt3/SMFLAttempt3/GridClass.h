@@ -31,6 +31,15 @@ public:
 	//getters and setters
 
 	
+	void ResetGrid() {
+		for (int r = 0; r < rows; r++) {
+			for (int c = 0; c < cols; c++) {
+				if (grid[r][c] == 1 || grid[r][c] == 2) {
+					grid[r][c] = 0;
+				}
+			}
+		}
+	}
 
 	void setCellState(int row, int col, int value) {
 		//if in grid bounds set the grid cell at those coordinates to given 

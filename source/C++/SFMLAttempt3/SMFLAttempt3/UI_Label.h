@@ -29,7 +29,7 @@ public:
 	void set_Font(std::string& filename);
 	sf::Color get_Color(const std::string& color);
 
-	
+	void set_LabelPos(sf::Vector2f newPos);
 	void set_labelText(std::string& labelText);
 
 	void set_labelColor(const std::string& labelColor);
@@ -39,7 +39,7 @@ private:
 	sf::Text label;
 	//will hold the font 
 	sf::Font font;
-
+	sf::Vector2f pos;
 
 
 };

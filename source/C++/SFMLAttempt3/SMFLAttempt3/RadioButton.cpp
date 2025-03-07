@@ -165,11 +165,11 @@ sf::Vector2f RadioButton::getPosition() {
 
 bool RadioButton::getState() {
 	if (isSelected) {
-		std::cout << "true" << std::endl;
+		/*std::cout << "true" << std::endl;*/
 		return true;
 	}
 	else {
-		std::cout << "false" << std::endl;
+		//std::cout << "false" << std::endl;
 		return false;
 	}
 

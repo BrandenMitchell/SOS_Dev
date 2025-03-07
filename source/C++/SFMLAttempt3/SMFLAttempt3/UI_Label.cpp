@@ -24,7 +24,10 @@ Label::Label(float x, float y, const std::string& labelText, const std::string& 
 	label.setString(labelText);
 	label.setFont(font);
 	label.setFillColor(label_color);
-	label.setPosition(sf::Vector2f(x, y));
+	pos.x = x;
+	pos.y = y;
+
+	label.setPosition(pos);
 	label.setCharacterSize(size);
 
 
@@ -60,7 +63,12 @@ void Label::draw_Label(sf::RenderWindow& window) {
 	window.draw(label);
 
 }
+void Label::set_LabelPos(sf::Vector2f newPos) {
+	pos.x = newPos.x;
+	pos.y = newPos.y;
+	label.setPosition(pos);
 
+}
 void Label::set_labelText(std::string& labelText) {
 	label.setString(labelText);
 
