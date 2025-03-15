@@ -1,2 +1,12 @@
-﻿  test_main.cpp
+﻿  catch_amalgamated.cpp
+  Game.cpp
+  GeneralGame.cpp
+  SimpleMode.cpp
+  RadioButton.cpp
+  RadioButtonGroup.cpp
+  SMFLAttempt3.cpp
+  test_main.cpp
+  UI_Label.cpp
+  Generating Code...
+LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
   SMFLAttempt3.vcxproj -> C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\x64\Test\SMFLAttempt3.exe

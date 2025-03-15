@@ -13,6 +13,10 @@ class Game {
 public:
     Game(std::unique_ptr<GameMode> mode, int rows, int cols );
     void start();
+    void init_GUI();
+    void init_board();
+
+    
 
 private:
     std::unique_ptr<GameMode> mode;

@@ -206,6 +206,7 @@
     <ClCompile Include="catch_amalgamated.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeneralGame.cpp" />
+    <ClCompile Include="GridClass.cpp" />
     <ClCompile Include="SimpleMode.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="RadioButtonGroup.cpp" />

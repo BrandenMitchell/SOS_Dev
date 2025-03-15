@@ -1,9 +1,7 @@
-﻿  catch_amalgamated.cpp
-  Game.cpp
+﻿  Game.cpp
   GeneralGame.cpp
+  GridClass.cpp
   SimpleMode.cpp
-  RadioButton.cpp
-  RadioButtonGroup.cpp
   SFMLSOS.cpp
 C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\SFMLSOS.cpp(85,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\SFMLSOS.cpp(85,12): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -97,8 +95,6 @@ C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\SFMLSOS.cpp(322,43): warni
           ]
 C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\SFMLSOS.cpp(342,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\SFMLSOS.cpp(343,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  SMFLAttempt3.cpp
-  UI_Label.cpp
   Generating Code...
 LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
   SMFLAttempt3.vcxproj -> C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\x64\Debug\SMFLAttempt3.exe
