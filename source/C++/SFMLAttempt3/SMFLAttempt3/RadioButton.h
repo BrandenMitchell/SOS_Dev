@@ -15,7 +15,9 @@ class RadioButton {
 
 public:
 	//default constructor 
-	RadioButton(float x, float y, float OuterRadius, float InnerRadius);
+	RadioButton();
+	
+	void initRadioButton(float x, float y, float OuterRadius, float InnerRadius);
 
 	//handle logic for a clicked button
 	//update state of button via isSelected and make sure clicking of button happens inside the bounds of the button

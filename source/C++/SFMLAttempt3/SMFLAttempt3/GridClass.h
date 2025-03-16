@@ -16,11 +16,13 @@ class Grid {
 public:
 	//constructor here 
 	//rows, cols will be given to determine the size of the game board, the value is what to make the value of each cell (default is 0 which is none)
-	Grid(int rows, int cols);
+	Grid(int rows, int cols, float width, float height);
 
 
 	//getters and setters
+	float getWidth();
 
+	float getHeight();
 	
 	void ResetGrid();
 
@@ -31,6 +33,7 @@ public:
 
 	void getGridVect(int rows, int cols);
 
+	std::vector<int> getDimensions();
 
 
 	//Draw game Board
@@ -43,6 +46,7 @@ private:
 	//private vars for class 
 	//rows, cols will be given to determine the size of the game board, the value is what to make the value of each cell (default is 0 which is none)
 	int rows, cols;
+	float width, height;
 
 	// in my gridState 0 is none , 1 is S, 2 is O 
 	int value = 0;

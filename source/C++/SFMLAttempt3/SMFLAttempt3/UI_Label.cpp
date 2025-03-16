@@ -8,10 +8,12 @@
 #include <map>
 
 
+Label::Label() {
+	
+}
 
 
-
-Label::Label(float x, float y, const std::string& labelText, const std::string& color, int size){
+void Label::initLabel(float x, float y, const std::string& labelText, const std::string& color, int size){
 	
 	//load the font file
 	//if fails throw err

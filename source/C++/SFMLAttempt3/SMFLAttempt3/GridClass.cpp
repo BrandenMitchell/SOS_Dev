@@ -12,9 +12,9 @@
 
 //grid class 
 
-	//constructor here 
+//constructor here 
 //rows, cols will be given to determine the size of the game board, the value is what to make the value of each cell (default is 0 which is none)
-Grid::Grid(int rows, int cols) : rows(rows), cols(cols) {
+Grid::Grid(int rows, int cols,float width, float height) : rows(rows), cols(cols), width(width),height(height) {
 	//enables grid to have rows, and cols. all set to 0 by default
 	grid.resize(rows, std::vector<int>(cols, 0));
 
@@ -67,6 +67,29 @@ void Grid::getGridVect(int rows, int cols) {
 
 		}
 	}
+}
+
+std::vector<int> Grid::getDimensions() {
+	std::vector <int> boardDimensions;
+	float boardSize = rows;
+
+	//list contains size (rows and cols) , width, height
+	boardDimensions.push_back(boardSize);
+	boardDimensions.push_back(width);
+	boardDimensions.push_back(height);
+	
+	return boardDimensions;
+
+
+}
+
+float Grid::getWidth() {
+	return width;
+}
+
+
+float Grid::getHeight() {
+	return height;
 }
 
 

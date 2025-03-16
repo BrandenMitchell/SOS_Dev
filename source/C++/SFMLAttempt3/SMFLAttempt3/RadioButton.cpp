@@ -11,7 +11,14 @@
 
 
 //default constructor 
-RadioButton::RadioButton(float x, float y, float OuterRadius, float InnerRadius): buttonPos(x,y), isSelected(false) {
+RadioButton::RadioButton() {
+
+}
+
+void RadioButton::initRadioButton(float x, float y, float OuterRadius, float InnerRadius){
+	buttonPos = sf::Vector2f(x,y);	
+	isSelected = false;
+
 	//initialize radius
 	outerRadius = OuterRadius;
 	innerRadius = InnerRadius;

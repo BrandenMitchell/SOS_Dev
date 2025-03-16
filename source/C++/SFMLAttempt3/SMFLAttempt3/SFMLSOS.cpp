@@ -82,7 +82,7 @@ int main(){
 	float gridHeight = 800; //game board height
 	
 	float squareSize = gridWidth / gridSize; //cell size
-	Grid grid(gridSize, gridSize);
+	Grid grid(gridSize, gridSize,gridWidth,gridHeight);
 
 	//finding center of board
 	float CenterGameBoardX = window.getSize().x / 2.f - gridWidth / 2.f;
@@ -98,41 +98,84 @@ int main(){
 
 
 	//---------------- UI elements  -----------------\\	
-	Label TitleLable(centerX, 23, "SOS GAME", "Cyan",60);
-	Label SimpleLabel(60,23, "Simple Game", "White", 55);
-	Label GeneralLabel(60,65, "General Game", "Cyan", 55);
-	Label ThreebyLabel(60,160, "3x3", "Magenta", 35);
-	Label FivebyLabel(160, 160, "5x5 ", "Red", 35);
-	Label SevenbyLabel(260, 160, "7x7 ", "Yellow", 35);
+	Label TitleLable;
+	Label SimpleLabel;
+	Label GeneralLabel;
+	Label ThreebyLabel;
+	Label FivebyLabel;
+	Label SevenbyLabel;
 
-	Label Player1Label(23, 200, "Player 1", "White",30);
-	Label Player2Label(123, 200, "Player 2", "White", 30);
 
-	Label Player1S(63, 250, "S", "White", 40);
-	Label Player2S(163, 250, "S", "White", 40);
-	Label Player1O(63, 320, "O", "White", 40);
-	Label Player2O(163, 320, "O", "White", 40);
+
+	TitleLable.initLabel(centerX, 23, "SOS GAME", "Cyan", 60);
+	SimpleLabel.initLabel(60, 23, "Simple Game", "White", 55);
+	GeneralLabel.initLabel(60, 65, "General Game", "Cyan", 55);
+	ThreebyLabel.initLabel(60, 160, "3x3", "Magenta", 35);
+	FivebyLabel.initLabel(160, 160, "5x5 ", "Red", 35);
+	SevenbyLabel.initLabel(260, 160, "7x7 ", "Yellow", 35);
+
+	Label Player1Label;
+	Label Player2Label;
+
+	Label Player1S;
+	Label Player2S;
+	Label Player1O;
+	Label Player2O;	
+	
+	Player1Label.initLabel(23, 200, "Player 1", "White",30);
+	Player2Label.initLabel(123, 200, "Player 2", "White", 30);
+
+	Player1S.initLabel(63, 250, "S", "White", 40);
+	Player2S.initLabel(163, 250, "S", "White", 40);
+	Player1O.initLabel(63, 320, "O", "White", 40);
+	Player2O.initLabel(163, 320, "O", "White", 40);
 
 	//Game Mode button init
-	RadioButton SimpleGameBtn(43, 60, 13, 8);
-	RadioButton GeneralGameBtn(43, 100, 13, 8);
+	RadioButton SimpleGameBtn;
+	RadioButton GeneralGameBtn;
 
 	
 	
 	
 	
 	//Game Board size Button init
-	RadioButton ThreeByThree(43, 160, 11, 8);
-	RadioButton FiveByFive(143, 160, 11, 8);
-	RadioButton SevenBySeven(243, 160, 11, 8);
+	RadioButton ThreeByThree;
+	RadioButton FiveByFive;
+	RadioButton SevenBySeven;
 
 	////Player 1 and 2 controls
 	//p1
-	RadioButton S_moveP1(43, 280, 11, 8);
-	RadioButton O_moveP1(43, 350, 11, 8);
+	RadioButton S_moveP1;
+	RadioButton O_moveP1;
 	//p2
-	RadioButton S_moveP2(143, 280, 11, 8);
-	RadioButton O_moveP2(143, 350, 11, 8);
+	RadioButton S_moveP2;
+	RadioButton O_moveP2;
+
+
+
+	SimpleGameBtn.initRadioButton(43, 60, 13, 8);
+	GeneralGameBtn.initRadioButton(43, 100, 13, 8);
+
+
+
+
+
+	//Game Board size Button init
+	ThreeByThree.initRadioButton(43, 160, 11, 8);
+	FiveByFive.initRadioButton(143, 160, 11, 8);
+	SevenBySeven.initRadioButton(243, 160, 11, 8);
+
+	 
+	
+	S_moveP1.initRadioButton(43, 280, 11, 8);
+	O_moveP1.initRadioButton(43, 350, 11, 8);
+	
+	S_moveP2.initRadioButton(143, 280, 11, 8);
+	O_moveP2.initRadioButton(143, 350, 11, 8);
+
+
+
+
 
 	//game mode btn group
 	RadioButtonGroup ModebtnGroup;

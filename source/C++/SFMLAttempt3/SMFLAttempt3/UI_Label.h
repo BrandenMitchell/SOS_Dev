@@ -16,9 +16,9 @@ class Label {
 
 
 public:
+	Label();
 
-
-	Label(float x, float y, const std::string& labelText, const std::string& color, int size );
+	void initLabel(float x, float y, const std::string& labelText, const std::string& color, int size );
 
 	//draw our label to the screen 
 
