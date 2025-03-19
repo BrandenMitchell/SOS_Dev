@@ -223,6 +223,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="UIClass.cpp" />
     <ClCompile Include="UI_Label.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +236,7 @@
     <ClInclude Include="SFMLSOS.h" />
     <ClInclude Include="SimpleMode.h" />
     <ClInclude Include="SMFLAttempt3.h" />
+    <ClInclude Include="UIClass.h" />
     <ClInclude Include="UI_Label.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

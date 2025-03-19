@@ -31,7 +31,7 @@ public:
 
 	//Gives me state of entire grid
 
-	void getGridVect(int rows, int cols);
+	std::vector<std::vector<int>> getGridVect();
 
 	std::vector<int> getDimensions();
 

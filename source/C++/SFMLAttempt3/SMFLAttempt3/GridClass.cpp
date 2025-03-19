@@ -59,14 +59,18 @@ int Grid::getCellState(int row, int col) const {
 
 //Gives me state of entire grid
 
-void Grid::getGridVect(int rows, int cols) {
-	for (int r = 0; r < rows; r++) {
+std::vector<std::vector<int>> Grid::getGridVect() {
+	
+	/*for (int r = 0; r < rows; r++) {
 		for (int c = 0; c < cols; c++) {
 
 			std::cout << "Row: " << r << "Col: " << c << getCellState(r, c) << std::endl;
+		
 
 		}
-	}
+	}*/
+	return grid;
+
 }
 
 std::vector<int> Grid::getDimensions() {

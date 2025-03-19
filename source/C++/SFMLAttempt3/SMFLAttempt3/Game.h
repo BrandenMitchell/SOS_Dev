@@ -4,8 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "GameMode.h"
-
 #include  <SFML/Graphics.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -16,7 +14,8 @@
 #include "UI_Label.h"
 #include "RadioButton.h"
 #include "RadioButtonGroup.h"
-#include "Game.h"
+
+#include "GameMode.h"
 #include "SimpleMode.h"
 #include "GeneralGame.h"
 
@@ -33,12 +32,17 @@ public:
 private:
     std::unique_ptr<GameMode> mode;
     Grid grid;
+    bool SimpGame = false;
+    bool GenGame = false;
     float squareSize; 
+    int gridSize; 
     sf::RenderWindow window;
     sf::Event event;
     float CenterGameBoardX;
     float CenterGameBoardY;
     float centerX;
+    bool Player1_turn = true;
+    bool Player2_turn = false;
 
     //UI labels
     Label TitleLable;

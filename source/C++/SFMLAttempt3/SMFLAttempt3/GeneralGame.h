@@ -1,6 +1,6 @@
 #pragma once
-#ifndef GeneralGame_H
-#define GeneralGame_H
+#ifndef GENERALGAME_H
+#define GENERALGAME_H
 
 #include "GameMode.h"
 #include "GridClass.h"
@@ -15,4 +15,4 @@ private:
 };
 
 
-#endif // !GeneralGame_H
+#endif // GENERALGAME_H
