@@ -19,6 +19,7 @@ public:
 	virtual bool isSOS(Grid& grid, int row, int col, int gridSize) = 0; //check if sos is made 
 	virtual bool isLastMove(Grid& grid, int row, int col, int gridSize) = 0; //check if last possible move is made
 	virtual void renderEndScreen(sf::RenderWindow& window) = 0;
+	virtual void resetGame() =0 ; //reset game state
 
 
 	//destructor

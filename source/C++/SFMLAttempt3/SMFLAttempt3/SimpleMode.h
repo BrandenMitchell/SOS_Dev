@@ -20,6 +20,8 @@ public:
 	void setEndString(std::string endtext);
 	std::string getEndString();
 	void renderEndScreen(sf::RenderWindow& window) override;
+	void resetGame() override; 
+
 
 
 

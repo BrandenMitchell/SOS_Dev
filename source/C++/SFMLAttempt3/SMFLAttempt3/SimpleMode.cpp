@@ -80,7 +80,7 @@ bool SimpleMode::isLastMove(Grid& grid, int row, int col, int gridSize) {
 
 	}
 	else {
-		std::cout << "this shit is last move stop" << std::endl;
+		std::cout << "this is last move stop" << std::endl;
 		lastMoveMade = true;
 		GameState = false;
 		isSOS(grid, row, col, gridSize);
@@ -111,6 +111,9 @@ void SimpleMode::GameOverSos(Grid& grid, int row, int col) {
 
 }
 
+void SimpleMode::resetGame() {
+	GameState = true;
+}
 
 //what logic do we want to track every move?
 //--- is this the last available spot on the grid? 

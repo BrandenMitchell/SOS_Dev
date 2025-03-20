@@ -30,6 +30,8 @@ public:
 private:
     std::unique_ptr<GameMode> mode;
     Grid grid;
+    bool simpleEnd = false;
+    bool generalEnd = false;
     bool GameRunning = false; 
     bool MainMenu = true;
     bool SimpGame = false;
@@ -93,7 +95,8 @@ private:
 	//p2
 	RadioButtonGroup Player2BtnGroup;
    
-    
+    SimpleMode simpleGame;
+    /*GeneralMode generalGame;*/
 
     void handleEvents();
     void handleInput(); // handle mouse interaction witht the game

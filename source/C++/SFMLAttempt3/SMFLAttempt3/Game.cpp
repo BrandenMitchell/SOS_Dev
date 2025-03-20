@@ -97,6 +97,9 @@ void Game::renderNewScreen(std::string key) {
 	
 	if (key == "main-menu") {
 		//do the main menu button select screen
+		std::string userText = "Choose Your Game Mode";
+		userDirection.set_labelText(userText);
+
 		TitleLable.draw_Label(window);
 		userDirection.draw_Label(window);
 		SimpleLabelend.draw_Label(window);
@@ -118,6 +121,10 @@ void Game::renderNewScreen(std::string key) {
 			grid.ResetGrid();
 			window.clear();
 			GameRunning = true;
+			MainMenu = false;
+			simpleGame.resetGame();
+
+			
 
 		}
 		else if (GeneralGameBtnend.handleClick(event.mouseButton.x, event.mouseButton.y)) {
@@ -133,12 +140,55 @@ void Game::renderNewScreen(std::string key) {
 			grid.ResetGrid();
 			window.clear();
 			GameRunning = true;
-
+			MainMenu = false;
+			//generalGame.resetGame();
 		}
 	}
 	else if (key == "simple-end") {
 		//end screen for the simple game
-	}
+		Label gameOver;
+		std::string userText = "Press Space to play again!" ;
+
+		std::string GameOverLabelText = simpleGame.getEndString();
+		gameOver.initLabel(400, 400, GameOverLabelText, "White", 60);
+		userDirection.set_labelText(userText);
+		gameOver.draw_Label(window);
+		userDirection.draw_Label(window);
+		window.display();
+		while (window.pollEvent(event)) {
+			
+			if (event.type == sf::Event::Closed) {
+				window.close();
+
+			}
+			if (event.type == sf::Event::Resized) {
+				//on resize update the window area / size
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
+
+
+
+			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space ) {
+				std::cout << "space pressed " << std::endl;
+				window.clear();
+				GameRunning = false;
+				simpleEnd = false;
+				MainMenu = true;
+				
+
+				
+				
+
+			}
+			
+
+			
+		}
+		
+
+	
+	}	
 	else if (key == "general-end") {
 		//end screen for the general game
 	}
@@ -357,7 +407,7 @@ void Game::handleInput() {
 
 				if (SimpGame == true) {
 					//Simple game is mode
-					SimpleMode simpleGame; 
+					//SimpleMode simpleGame; 
 					/*while (simpleGame.getGameState()) {*/
 					if (S_moveP1.getState() and Player1_turn) {
 						// call simple or general mode makeSmove()
@@ -417,13 +467,12 @@ void Game::handleInput() {
 					if (!simpleGame.getGameState()) {
 						//the simple game has ended. 
 						
-						endText = simpleGame.getEndString();
+						
 						SimpGame = false;
-
-						GameEnded.initLabel(CenterGameBoardX, CenterGameBoardY, endText, "White", 50);
-						//simpleGame.renderEndScreen(window);
 						SimpleGameBtn.setState(false);
 						GameRunning = false;
+						simpleEnd = true;
+
 
 
 					}
@@ -445,6 +494,7 @@ void Game::handleInput() {
 					std::cout << "GAME MODE ERR OCCURED" << std::endl;
 
 				}
+				updateGameLogic();
 				
 				
 			}
@@ -452,11 +502,10 @@ void Game::handleInput() {
 
 		}
 	
-		updateGameLogic();
 
 	
 	}
-		
+	
 }
 	
 
@@ -464,9 +513,15 @@ void Game::handleInput() {
 
 //update the game logic
 void Game::updateGameLogic() {
-	if (!GameRunning) {
+	if (!(GameRunning) and MainMenu == true) {
+		//run  main menu screen 
 		std::string main = "main-menu";
 		renderNewScreen(main);
+
+	}
+	else if (!(GameRunning) and simpleEnd == true) {
+		std::string ending = "simple-end";
+		renderNewScreen(ending);
 
 	}
 	else {
