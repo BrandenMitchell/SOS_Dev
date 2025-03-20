@@ -1,97 +1,102 @@
 ﻿  Game.cpp
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(100,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\gameSelectScreen.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(107,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(107,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(123,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(123,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(163,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(100,47): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(163,47): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(163,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(163,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(179,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(179,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(203,52): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(223,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(223,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(239,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(239,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(263,52): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(203,40): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(263,40): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(213,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(216,55): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(273,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(277,55): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(216,43): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(277,43): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(225,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(229,57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(286,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(292,57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(229,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(292,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(238,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(258,48): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(301,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(323,48): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(258,36): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(323,36): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(265,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(330,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(265,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(330,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(271,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(336,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(271,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(336,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(276,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(341,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(276,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(341,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(283,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(284,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(466,14): warning C4244: 'initializing': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(348,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(349,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(487,14): warning C4244: 'initializing': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(469,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\Game.cpp(489,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   SMFLAttempt3.vcxproj -> C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\x64\Debug\SMFLAttempt3.exe

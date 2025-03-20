@@ -71,7 +71,9 @@ void Game::start() {
 		std::cout << "The current game mode is unknown." << std::endl;
 	}
 	mode->Rules();
-	updateGameLogic();
+
+	//updateGameLogic();
+	
 	handleEvents();
 	render();
 
@@ -79,7 +81,68 @@ void Game::start() {
 	
 	
 }
+void Game::renderNewScreen(std::string key) {
+	window.clear();
+	RadioButton SimpleGameBtnend;
+	RadioButton GeneralGameBtnend;
+	SimpleGameBtnend.initRadioButton(300, 300, 20, 16);
+	GeneralGameBtnend.initRadioButton(600, 300, 20, 16);
 
+	Label SimpleLabelend;
+	Label GeneralLabelend;
+	Label userDirection;
+	SimpleLabelend.initLabel(250, 300, "Simple Game", "White", 50);
+	GeneralLabelend.initLabel(500, 300, "General Game", "Green", 50);
+	userDirection.initLabel(300, 200, "Choose Your Game Mode", "White", 50);
+	
+	if (key == "main-menu") {
+		//do the main menu button select screen
+		TitleLable.draw_Label(window);
+		userDirection.draw_Label(window);
+		SimpleLabelend.draw_Label(window);
+		GeneralLabelend.draw_Label(window);
+		SimpleGameBtnend.drawButton(window);
+		GeneralGameBtnend.drawButton(window);
+		window.display();
+		if (SimpleGameBtnend.handleClick(event.mouseButton.x, event.mouseButton.y)) {
+
+			// Ensure only one button is active at a time
+			GeneralGameBtnend.setState(false);
+			GeneralGameBtnend.setInnerColor("Transparent");
+			SimpleLabelend.set_labelColor("Green");
+			GeneralLabelend.set_labelColor("Cyan");
+			SimpGame = true;
+			GenGame = false;
+			Player1_turn = true;
+			Player2_turn = false;
+			grid.ResetGrid();
+			window.clear();
+			GameRunning = true;
+
+		}
+		else if (GeneralGameBtnend.handleClick(event.mouseButton.x, event.mouseButton.y)) {
+			SimpleGameBtnend.setState(false);
+			SimpleGameBtnend.setInnerColor("Transparent");
+			SimpleLabelend.set_labelColor("White");
+
+			GeneralLabelend.set_labelColor("Green");
+			SimpGame = false;
+			GenGame = true;
+			Player1_turn = true;
+			Player2_turn = false;
+			grid.ResetGrid();
+			window.clear();
+			GameRunning = true;
+
+		}
+	}
+	else if (key == "simple-end") {
+		//end screen for the simple game
+	}
+	else if (key == "general-end") {
+		//end screen for the general game
+	}
+}
 
 void Game::handleEvents() {
 
@@ -108,12 +171,12 @@ void Game::handleEvents() {
 				centerX = event.size.width / 2.f - 80;
 
 
-				/*float titleLabelY = 23;
+				float titleLabelY = 23;
 				sf::Vector2f titleLabelPos;
 				titleLabelPos.x = centerX;
 				titleLabelPos.y = titleLabelY;
 
-				TitleLable.set_LabelPos(titleLabelPos);*/
+				TitleLable.set_LabelPos(titleLabelPos);
 
 
 
@@ -133,6 +196,8 @@ void Game::handleEvents() {
 		
 		
 		}
+		
+
 
 		updateGameLogic();
 
@@ -149,11 +214,6 @@ void Game::handleEvents() {
 // handle mouse interaction with the game
 void Game::handleInput() { 
 	//std::cout << "Handling Input...\n" << std::endl;
-	
-	
-	 
-
-	
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
@@ -212,6 +272,7 @@ void Game::handleInput() {
 			Player2_turn = false;
 			gridSize = 3.f;
 			grid.ResetGrid();
+			window.clear();
 		}
 		else if (FiveByFive.handleClick(mousePos.x, mousePos.y)) {
 			SevenBySeven.setState(false);
@@ -223,6 +284,8 @@ void Game::handleInput() {
 			Player1_turn = true;
 			Player2_turn = false;
 			gridSize = 5.f;
+			window.clear();
+
 
 		}
 
@@ -236,6 +299,8 @@ void Game::handleInput() {
 			Player1_turn = true;
 			Player2_turn = false;
 			gridSize = 7.f;
+			window.clear();
+
 			
 		}
 
@@ -294,67 +359,76 @@ void Game::handleInput() {
 					//Simple game is mode
 					SimpleMode simpleGame; 
 					/*while (simpleGame.getGameState()) {*/
-						if (S_moveP1.getState() and Player1_turn) {
-							// call simple or general mode makeSmove()
-							//pass it a reference to the grid , the row and col
-							key = "s";
+					if (S_moveP1.getState() and Player1_turn) {
+						// call simple or general mode makeSmove()
+						//pass it a reference to the grid , the row and col
+						key = "s";
 
-							if (grid.getCellState(row, col) == 0) {
-								simpleGame.makeMove(grid, row, col, key,1, gridSize);
+						if (grid.getCellState(row, col) == 0) {
+							simpleGame.makeMove(grid, row, col, key,1, gridSize);
 								
-								Player1_turn = false;
-								Player2_turn = true;
-								S_moveP1.setState(false);
-							}
-
+							Player1_turn = false;
+							Player2_turn = true;
+							S_moveP1.setState(false);
 						}
-						else if (O_moveP1.getState() and Player1_turn) {
-							key = "o";
 
-							if (grid.getCellState(row, col) == 0) {
-								simpleGame.makeMove(grid, row, col, key, 1, gridSize);
+					}
+					else if (O_moveP1.getState() and Player1_turn) {
+						key = "o";
+
+						if (grid.getCellState(row, col) == 0) {
+							simpleGame.makeMove(grid, row, col, key, 1, gridSize);
 								
 
 
 
-								Player1_turn = false;
-								Player2_turn = true;
-								O_moveP1.setState(false);
-							}
-
-
-
+							Player1_turn = false;
+							Player2_turn = true;
+							O_moveP1.setState(false);
 						}
 
-						if (S_moveP2.getState() and Player2_turn) {
-							key = "s";
+					}
 
-							if (grid.getCellState(row, col) == 0) {
-								simpleGame.makeMove(grid, row, col, key,2,gridSize);
+					if (S_moveP2.getState() and Player2_turn) {
+						key = "s";
 
-								Player2_turn = false;
-								Player1_turn = true;
-								S_moveP2.setState(false);
-							}
+						if (grid.getCellState(row, col) == 0) {
+							simpleGame.makeMove(grid, row, col, key,2,gridSize);
 
+							Player2_turn = false;
+							Player1_turn = true;
+							S_moveP2.setState(false);
 						}
-						else if (O_moveP2.getState() and Player2_turn) {
-							key = "o";
 
-							if (grid.getCellState(row, col) == 0) {
-								simpleGame.makeMove(grid, row, col, key,2, gridSize);
+					}
+					else if (O_moveP2.getState() and Player2_turn) {
+						key = "o";
 
-								Player2_turn = false;
-								Player1_turn = true;
-								O_moveP2.setState(false);
-							}
+						if (grid.getCellState(row, col) == 0) {
+							simpleGame.makeMove(grid, row, col, key,2, gridSize);
 
-
+							Player2_turn = false;
+							Player1_turn = true;
+							O_moveP2.setState(false);
 						}
+
+
+					}
+					if (!simpleGame.getGameState()) {
+						//the simple game has ended. 
 						
-					/*}*/
-					//simple game has ended 
-					//simpleGame.GameOver();
+						endText = simpleGame.getEndString();
+						SimpGame = false;
+
+						GameEnded.initLabel(CenterGameBoardX, CenterGameBoardY, endText, "White", 50);
+						//simpleGame.renderEndScreen(window);
+						SimpleGameBtn.setState(false);
+						GameRunning = false;
+
+
+					}
+
+				
 
 					
 					
@@ -371,60 +445,7 @@ void Game::handleInput() {
 					std::cout << "GAME MODE ERR OCCURED" << std::endl;
 
 				}
-				////For now this is how you change from S to O 
-				//if (S_moveP1.getState() and Player1_turn) {
-				//	// call simple or general mode makeSmove()
-				//	//pass it a reference to the grid , the row and col
-				//	key = "s";
-
-
-				//	/*auto simpleMode = dynamic_cast<SimpleMode*>(mode.get());
-				//	simpleMode->makeMove(grid, row, col,key );*/
-
-				//	if (grid.getCellState(row, col) == 0) {
-
-
-				//		grid.setCellState(row, col, 1);
-				//		Player1_turn = false;
-				//		Player2_turn = true;
-				//		S_moveP1.setState(false);
-				//	}
-
-				//}
-				//else if (O_moveP1.getState() and Player1_turn) {
-
-				//	if (grid.getCellState(row, col) == 0) {
-				//		grid.setCellState(row, col, 2);
-				//		Player1_turn = false;
-				//		Player2_turn = true;
-				//		O_moveP1.setState(false);
-				//	}
-
-
-
-				//}
-
-				//if (S_moveP2.getState() and Player2_turn) {
-
-				//	if (grid.getCellState(row, col) == 0) {
-				//		grid.setCellState(row, col, 1);
-				//		Player2_turn = false;
-				//		Player1_turn = true;
-				//		S_moveP2.setState(false);
-				//	}
-
-				//}
-				//else if (O_moveP2.getState() and Player2_turn) {
-
-				//	if (grid.getCellState(row, col) == 0) {
-				//		grid.setCellState(row, col, 2);
-				//		Player2_turn = false;
-				//		Player1_turn = true;
-				//		O_moveP2.setState(false);
-				//	}
-
-
-				//}
+				
 				
 			}
 			
@@ -443,9 +464,17 @@ void Game::handleInput() {
 
 //update the game logic
 void Game::updateGameLogic() {
-	//std::cout << "Updating Logic ...\n" << std::endl;
-	render();
+	if (!GameRunning) {
+		std::string main = "main-menu";
+		renderNewScreen(main);
 
+	}
+	else {
+		render();
+	}
+		
+	
+	 
 }
 
 
@@ -456,8 +485,7 @@ void Game::render() {
 	std::vector<int> dimensions = grid.getDimensions();
 	
 	float width = dimensions[1];
-
-
+	
 	grid.drawCells(window, squareSize, gridSize, CenterGameBoardX, CenterGameBoardY, width);
 	Player1Label.draw_Label(window);
 	Player2Label.draw_Label(window);
@@ -480,6 +508,8 @@ void Game::render() {
 	O_moveP1.drawButton(window);
 	S_moveP2.drawButton(window);
 	O_moveP2.drawButton(window);
+
+	
 	
 	window.display();
 

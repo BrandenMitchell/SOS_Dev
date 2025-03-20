@@ -51,6 +51,9 @@
     <ClCompile Include="UIClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gameSelectScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SMFLAttempt3.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameSelectScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

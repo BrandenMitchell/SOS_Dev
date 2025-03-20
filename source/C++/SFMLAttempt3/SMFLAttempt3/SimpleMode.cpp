@@ -78,7 +78,6 @@ bool SimpleMode::isLastMove(Grid& grid, int row, int col, int gridSize) {
 		/*GameState = true;*/
 		return false; 
 
-	
 	}
 	else {
 		std::cout << "this shit is last move stop" << std::endl;
@@ -89,11 +88,12 @@ bool SimpleMode::isLastMove(Grid& grid, int row, int col, int gridSize) {
 	}
 }
 
-void SimpleMode::GameOverDraw(Grid& grid, int row, int col) {
+void  SimpleMode::GameOverDraw(Grid& grid, int row, int col) {
 	// or simple game can end when all available spots on the board are filled. 
 
 	std::cout << "Simple Game has ended in a DRAW, good game" << std::endl;
-
+	grid.ResetGrid();
+	setEndString("Simple Game has ended in a DRAW, good game");
 
 }
 
@@ -103,6 +103,8 @@ void SimpleMode::GameOverSos(Grid& grid, int row, int col) {
 	
 	
 	std::cout << "Simple Game has ended, the winner is Player: " << currentPlayer <<". Congratulations"<< std::endl;
+	grid.ResetGrid();
+	setEndString("Simple Game has ended, the winner is Player: "+ std::to_string(currentPlayer) + ". Congratulations");
 	GameState = false;
 	
 
@@ -149,4 +151,63 @@ void SimpleMode::makeMove(Grid& grid, int row, int col, std::string key, int cur
 
 bool SimpleMode::getGameState() {
 	return GameState;
+}
+
+
+void SimpleMode::setEndString(std::string endtext) {
+	endingString = endtext;
+
+
+}
+
+
+std::string SimpleMode::getEndString() {
+	return endingString;
+
+	
+}
+void SimpleMode::renderEndScreen(sf::RenderWindow& window) {
+	//takes in the window
+	//clears the window
+	//While some condition, display the end text, and say "press space to reset" and then track if the space bar is pressed. 
+	//keep them in the loop until the space bar is pressed .
+	//window.clear();
+	//bool newGame = false;
+	//sf::Event event;
+
+	//while (newGame == false) {
+	//	while (window.pollEvent(event)) {
+	//		if (event.type == sf::Event::Closed) {
+	//			window.close();
+
+
+
+	//		}
+	//		if (event.type == sf::Event::Resized) {
+	//			//on resize update the window area / size
+	//			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+	//			window.setView(sf::View(visibleArea));
+
+
+
+	//		}
+	//		if (event.type == sf::Event::KeyPressed && event.KeyPressed == sf::Keyboard::Space ) {
+	//			std::cout << "space pressed " << std::endl;
+	//			Label gameEnd;
+	//			gameEnd.initLabel(300, 300, endingString, "white", 50);
+	//			gameEnd.draw_Label(window);
+	//			
+	//			newGame = true;
+	//			break;
+	//			
+
+	//		}
+
+
+	//	}
+
+	//	
+
+	//}
+
 }

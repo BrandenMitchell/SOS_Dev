@@ -14,24 +14,24 @@
 #include "UI_Label.h"
 #include "RadioButton.h"
 #include "RadioButtonGroup.h"
-
+#include <functional>
 #include "GameMode.h"
 #include "SimpleMode.h"
 #include "GeneralGame.h"
-
+#include "gameSelectScreen.h"
 
 class Game {
 
 public:
     Game(std::unique_ptr<GameMode> mode, int rows, int cols );
     void start();
-
-
     
 
 private:
     std::unique_ptr<GameMode> mode;
     Grid grid;
+    bool GameRunning = false; 
+    bool MainMenu = true;
     bool SimpGame = false;
     bool GenGame = false;
     float squareSize; 
@@ -43,6 +43,7 @@ private:
     float centerX;
     bool Player1_turn = true;
     bool Player2_turn = false;
+    std::string endText = "";
 
     //UI labels
     Label TitleLable;
@@ -58,7 +59,7 @@ private:
     Label Player2S;
     Label Player1O;
     Label Player2O;
-
+    Label GameEnded;
 
 	RadioButton SimpleGameBtn;
 	RadioButton GeneralGameBtn;
@@ -91,14 +92,18 @@ private:
 
 	//p2
 	RadioButtonGroup Player2BtnGroup;
-	
-    
+   
     
 
     void handleEvents();
     void handleInput(); // handle mouse interaction witht the game
     void updateGameLogic(); //update the game logic
     void render();  //render current game sate
+    void renderNewScreen(std::string key);
+ 
+   
 };
+
+
 
 #endif // GAME_H

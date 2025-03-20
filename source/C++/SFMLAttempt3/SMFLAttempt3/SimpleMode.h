@@ -5,8 +5,8 @@
 #include "GameMode.h"
 #include "GridClass.h"
 
-class SimpleMode : public GameMode  {
-		
+class SimpleMode : public GameMode {
+
 public:
 	//default constructor 
 	SimpleMode();
@@ -17,10 +17,16 @@ public:
 	bool isSOS(Grid& grid, int row, int col, int gridSize) override; //check if sos is made 
 	bool isLastMove(Grid& grid, int row, int col, int gridSize) override;
 	bool getGameState();
+	void setEndString(std::string endtext);
+	std::string getEndString();
+	void renderEndScreen(sf::RenderWindow& window) override;
+
+
 
 
 private:
 	int total = 0;
+	std::string endingString ="";
 	bool lastMoveMade = false;
 	bool Player1Turn = true;
 	bool Player2Turn = false;

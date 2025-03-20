@@ -205,6 +205,7 @@
   <ItemGroup>
     <ClCompile Include="catch_amalgamated.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gameSelectScreen.cpp" />
     <ClCompile Include="GeneralGame.cpp" />
     <ClCompile Include="GridClass.cpp" />
     <ClCompile Include="SimpleMode.cpp" />
@@ -229,6 +230,7 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMode.h" />
+    <ClInclude Include="gameSelectScreen.h" />
     <ClInclude Include="GeneralGame.h" />
     <ClInclude Include="GridClass.h" />
     <ClInclude Include="RadioButton.h" />
