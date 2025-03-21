@@ -96,7 +96,7 @@ private:
 	RadioButtonGroup Player2BtnGroup;
    
     SimpleMode simpleGame;
-    /*GeneralMode generalGame;*/
+    GeneralMode generalGame;
 
     void handleEvents();
     void handleInput(); // handle mouse interaction witht the game

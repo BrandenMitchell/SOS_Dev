@@ -115,14 +115,13 @@ void SimpleMode::resetGame() {
 	GameState = true;
 }
 
+
 //what logic do we want to track every move?
 //--- is this the last available spot on the grid? 
 //		since its simple game if this is last available spot the game will also be a draw
 // 
 //---- Does this form an SOS?
 //			since its simple game if it forms an sos the game is over and the current player wins 
-//---- D
-
 void SimpleMode::makeMove(Grid& grid, int row, int col, std::string key, int currPlayersTurn,int gridSize) {
 
 	//update the current player variable, should either be 1 or 2
@@ -146,6 +145,8 @@ void SimpleMode::makeMove(Grid& grid, int row, int col, std::string key, int cur
 	else {
 		std::cout << "key failed" << std::endl;
 	}
+	//check if its the last possible move in the game 
+	// inside this we also check for the presence of an os
 	isLastMove(grid, row, col, gridSize);
 	
 }
@@ -169,48 +170,6 @@ std::string SimpleMode::getEndString() {
 
 	
 }
-void SimpleMode::renderEndScreen(sf::RenderWindow& window) {
-	//takes in the window
-	//clears the window
-	//While some condition, display the end text, and say "press space to reset" and then track if the space bar is pressed. 
-	//keep them in the loop until the space bar is pressed .
-	//window.clear();
-	//bool newGame = false;
-	//sf::Event event;
-
-	//while (newGame == false) {
-	//	while (window.pollEvent(event)) {
-	//		if (event.type == sf::Event::Closed) {
-	//			window.close();
 
 
 
-	//		}
-	//		if (event.type == sf::Event::Resized) {
-	//			//on resize update the window area / size
-	//			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-	//			window.setView(sf::View(visibleArea));
-
-
-
-	//		}
-	//		if (event.type == sf::Event::KeyPressed && event.KeyPressed == sf::Keyboard::Space ) {
-	//			std::cout << "space pressed " << std::endl;
-	//			Label gameEnd;
-	//			gameEnd.initLabel(300, 300, endingString, "white", 50);
-	//			gameEnd.draw_Label(window);
-	//			
-	//			newGame = true;
-	//			break;
-	//			
-
-	//		}
-
-
-	//	}
-
-	//	
-
-	//}
-
-}

@@ -19,7 +19,7 @@ public:
 	bool getGameState();
 	void setEndString(std::string endtext);
 	std::string getEndString();
-	void renderEndScreen(sf::RenderWindow& window) override;
+
 	void resetGame() override; 
 
 
@@ -27,7 +27,6 @@ public:
 
 
 private:
-	int total = 0;
 	std::string endingString ="";
 	bool lastMoveMade = false;
 	bool Player1Turn = true;

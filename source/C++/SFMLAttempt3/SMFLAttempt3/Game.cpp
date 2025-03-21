@@ -130,9 +130,8 @@ void Game::renderNewScreen(std::string key) {
 		else if (GeneralGameBtnend.handleClick(event.mouseButton.x, event.mouseButton.y)) {
 			SimpleGameBtnend.setState(false);
 			SimpleGameBtnend.setInnerColor("Transparent");
-			SimpleLabelend.set_labelColor("White");
-
 			GeneralLabelend.set_labelColor("Green");
+			SimpleLabelend.set_labelColor("Cyan");
 			SimpGame = false;
 			GenGame = true;
 			Player1_turn = true;
@@ -141,7 +140,7 @@ void Game::renderNewScreen(std::string key) {
 			window.clear();
 			GameRunning = true;
 			MainMenu = false;
-			//generalGame.resetGame();
+			generalGame.resetGame();
 		}
 	}
 	else if (key == "simple-end") {
@@ -150,7 +149,7 @@ void Game::renderNewScreen(std::string key) {
 		std::string userText = "Press Space to play again!" ;
 
 		std::string GameOverLabelText = simpleGame.getEndString();
-		gameOver.initLabel(400, 400, GameOverLabelText, "White", 60);
+		gameOver.initLabel(300, 300, GameOverLabelText, "White", 50);
 		userDirection.set_labelText(userText);
 		gameOver.draw_Label(window);
 		userDirection.draw_Label(window);
@@ -170,7 +169,7 @@ void Game::renderNewScreen(std::string key) {
 
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space ) {
-				std::cout << "space pressed " << std::endl;
+				std::cout << "Loading Game Select..." << std::endl;
 				window.clear();
 				GameRunning = false;
 				simpleEnd = false;
@@ -191,6 +190,42 @@ void Game::renderNewScreen(std::string key) {
 	}	
 	else if (key == "general-end") {
 		//end screen for the general game
+		Label gameOverG;
+		std::string userText = "Press Space to play again!";
+		
+		std::string GameOverLabelText = generalGame.getEndString();
+		
+		gameOverG.initLabel(300, 300, GameOverLabelText, "White", 50);
+		userDirection.set_labelText(userText);
+		gameOverG.draw_Label(window);
+		userDirection.draw_Label(window);
+		window.display();
+		while (window.pollEvent(event)) {
+
+			if (event.type == sf::Event::Closed) {
+				window.close();
+
+			}
+			if (event.type == sf::Event::Resized) {
+				//on resize update the window area / size
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
+
+
+
+			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+				std::cout << "Loading Game Select..." << std::endl;
+				window.clear();
+				GameRunning = false;
+				generalEnd = false;
+				MainMenu = true;
+
+			}
+
+
+
+		}
 	}
 }
 
@@ -283,7 +318,7 @@ void Game::handleInput() {
 			Player1_turn = true;
 			Player2_turn = false;
 			grid.ResetGrid();
-
+			simpleGame.resetGame();
 
 		}
 		else if (GeneralGameBtn.handleClick(event.mouseButton.x, event.mouseButton.y)) {
@@ -298,7 +333,7 @@ void Game::handleInput() {
 			Player1_turn = true;
 			Player2_turn = false;
 			grid.ResetGrid();
-
+			generalGame.resetGame();
 		}
 		if (!SimpleGameBtn.getState()) {
 			SimpleLabel.set_labelColor("White");
@@ -407,8 +442,8 @@ void Game::handleInput() {
 
 				if (SimpGame == true) {
 					//Simple game is mode
-					//SimpleMode simpleGame; 
-					/*while (simpleGame.getGameState()) {*/
+					
+			
 					if (S_moveP1.getState() and Player1_turn) {
 						// call simple or general mode makeSmove()
 						//pass it a reference to the grid , the row and col
@@ -484,7 +519,72 @@ void Game::handleInput() {
 				}
 				else if (GenGame == true){
 					//else General Game is mode
-					
+					if (S_moveP1.getState() and Player1_turn) {
+						
+						key = "s";
+
+						if (grid.getCellState(row, col) == 0) {
+							generalGame.makeMove(grid, row, col, key, 1, gridSize);
+
+							Player1_turn = false;
+							Player2_turn = true;
+							S_moveP1.setState(false);
+						}
+
+					}
+					else if (O_moveP1.getState() and Player1_turn) {
+						key = "o";
+
+						if (grid.getCellState(row, col) == 0) {
+							generalGame.makeMove(grid, row, col, key, 1, gridSize);
+
+
+
+
+							Player1_turn = false;
+							Player2_turn = true;
+							O_moveP1.setState(false);
+						}
+
+					}
+
+					if (S_moveP2.getState() and Player2_turn) {
+						key = "s";
+
+						if (grid.getCellState(row, col) == 0) {
+							generalGame.makeMove(grid, row, col, key, 2, gridSize);
+
+							Player2_turn = false;
+							Player1_turn = true;
+							S_moveP2.setState(false);
+						}
+
+					}
+					else if (O_moveP2.getState() and Player2_turn) {
+						key = "o";
+
+						if (grid.getCellState(row, col) == 0) {
+							generalGame.makeMove(grid, row, col, key, 2, gridSize);
+
+							Player2_turn = false;
+							Player1_turn = true;
+							O_moveP2.setState(false);
+						}
+
+
+					}
+					if (!generalGame.getGameState()) {
+						//the general game has ended. 
+
+
+						GenGame = false;
+						GeneralGameBtn.setState(false);
+						GameRunning = false;
+						generalEnd = true;
+
+
+
+					}
 				
 				
 				
@@ -521,6 +621,12 @@ void Game::updateGameLogic() {
 	}
 	else if (!(GameRunning) and simpleEnd == true) {
 		std::string ending = "simple-end";
+		renderNewScreen(ending);
+
+	}
+	else if (!(GameRunning) and generalEnd == true) {
+		std::string ending = "general-end";
+		
 		renderNewScreen(ending);
 
 	}
