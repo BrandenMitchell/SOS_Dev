@@ -86,36 +86,85 @@ bool GeneralMode::isSOS(Grid& grid, int row, int col, int gridSize) {
 	int rows = gridSize;
 	int cols = gridSize;
 
-	// Check for SOS horizontally, vertically, and diagonally
-	for (int r = 0; r < rows; ++r) {
-		for (int c = 0; c < cols; ++c) {
-			// Check horizontal (to the right)
-			if (c + 2 < cols && gridState[r][c] == 1 && gridState[r][c + 1] == 2 && gridState[r][c + 2] == 1) {
-				incrementTotals();
-
-				
-				
-			}
-			// Check vertical (downwards)
-			else if (r + 2 < rows && gridState[r][c] == 1 && gridState[r + 1][c] == 2 && gridState[r + 2][c] == 1) {
-				incrementTotals();
-
-				
-			}
-			// Check diagonal top-left to bottom-right
-			else if (r + 2 < rows && c + 2 < cols && gridState[r][c] == 1 && gridState[r + 1][c + 1] == 2 && gridState[r + 2][c + 2] == 1) {
-				incrementTotals();
-
-				
-			}
-			// Check diagonal top-right to bottom-left
-			else if (r + 2 < rows && c - 2 >= 0 && gridState[r][c] == 1 && gridState[r + 1][c - 1] == 2 && gridState[r + 2][c - 2] == 1) {
-				incrementTotals();
-
-				
-			}
+	if (col - 1 >= 0 && col + 1 < cols) {
+		if (gridState[row][col - 1] == 1 && gridState[row][col] == 2 && gridState[row][col + 1] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed horizontally at (" << row << ", " << col << ")\n";
 		}
 	}
+	if (col + 2 < cols) {
+		if (gridState[row][col] == 1 && gridState[row][col + 1] == 2 && gridState[row][col + 2] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed horizontally at (" << row << ", " << col << ")\n";
+		}
+	}
+	if (col - 2 >= 0) {
+		if (gridState[row][col-2] == 1 && gridState[row][col - 1] == 2 && gridState[row][col ] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed horizontally at (" << row << ", " << col << ")\n";
+		}
+	}
+
+	// Vertical: check if "S O S" is formed at the current column (top-down)
+	if (row - 1 >= 0 && row + 1 < rows) {
+		if (gridState[row - 1][col] == 1 && gridState[row][col] == 2 && gridState[row + 1][col] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed vertically at (" << row << ", " << col << ")\n";
+		}
+	}
+	if (row + 2 < rows ) {
+		if (gridState[row][col] == 1 && gridState[row + 1][col] == 2 && gridState[row + 2][col] == 1) {
+			incrementTotals();
+		}
+		
+
+	}
+	if (row - 2 >= 0) {
+		if (gridState[row-2][col] == 1 && gridState[row - 1][col] == 2 && gridState[row][col] == 1) {
+			incrementTotals();
+		}
+	}
+
+	// Diagonal (top-left to bottom-right): check if "S O S" is formed
+	if (row - 1 >= 0 && col - 1 >= 0 && row + 1 < rows && col + 1 < cols) {
+		if (gridState[row - 1][col - 1] == 1 && gridState[row][col] == 2 && gridState[row + 1][col + 1] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed diagonally (top-left to bottom-right) at (" << row << ", " << col << ")\n";
+		}
+	}
+	if (row + 2 < rows && col + 2 < cols) {
+		if (gridState[row][col] == 1 && gridState[row +1][col + 1] == 2 && gridState[row + 2][col + 2] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed diagonally (top-left to bottom-right) at (" << row << ", " << col << ")\n";
+		}
+	}
+	if (row - 2 >= 0 && col - 2 >= 0) {
+		if (gridState[row-2][col-2] == 1 && gridState[row - 1][col - 1] == 2 && gridState[row][col] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed diagonally (top-left to bottom-right) at (" << row << ", " << col << ")\n";
+		}
+	}
+	// Diagonal (top-right to bottom-left): check if "S O S" is formed
+	if (row - 1 >= 0 && col + 1 < cols && row + 1 < rows && col - 1 >= 0) {
+		if (gridState[row - 1][col + 1] == 1 && gridState[row][col] == 2 && gridState[row + 1][col - 1] == 1) {
+			incrementTotals();
+			std::cout << "SOS formed diagonally (top-right to bottom-left) at (" << row << ", " << col << ")\n";
+		}
+	}
+	if (row -2 >= 0 and col +2 < cols) {
+		if (gridState[row][col] == 1 && gridState[row - 1][col + 1] == 2 && gridState[row - 2][col + 2]) {
+			incrementTotals();
+			std::cout << "SOS formed diagonally (top-right to bottom-left) at (" << row << ", " << col << ")\n";
+		}
+	}
+	if (col - 2 >= 0 and row + 2 < rows) {
+		if (gridState[row+2][col-2] == 1 && gridState[row + 1][col - 1] == 2 && gridState[row][col]) {
+			incrementTotals();
+			std::cout << "SOS formed diagonally (top-right to bottom-left) at (" << row << ", " << col << ")\n";
+		}
+	}
+
+
 	if (P1total == P2total) {
 		if (!lastMoveMade) {
 			return false;
@@ -143,11 +192,22 @@ bool GeneralMode::isSOS(Grid& grid, int row, int col, int gridSize) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
 void GeneralMode::incrementTotals() {
+	
 	//if currplayer is player 1
 	if (currentPlayer == 1) {
-		P1total += 1;
 		
+		P1total += 1;
 	}
 	//if currplayer is player 2
 	else if (currentPlayer == 2) {

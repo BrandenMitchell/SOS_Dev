@@ -35,6 +35,7 @@ private:
 	bool Player1Turn = true;
 	bool Player2Turn = false;
 	
+	
 	//0 for default , otherwise 1 or 2
 	int currentPlayer = 0;
 	// will be set to false when the game is over. 

@@ -1,3 +1,2 @@
 ﻿  GeneralGame.cpp
-LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
   SMFLAttempt3.vcxproj -> C:\Users\branden\source\C++\SFMLAttempt3\SMFLAttempt3\x64\Debug\SMFLAttempt3.exe
