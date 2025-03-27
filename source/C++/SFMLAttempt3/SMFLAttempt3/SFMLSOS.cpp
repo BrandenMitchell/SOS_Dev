@@ -20,19 +20,6 @@
 #include "GeneralGame.h"
 
 
-//using namespace std;
-
-
-
-//function declaration and definitions
-
-
-
-
-
-
-
-
 
 
 
@@ -48,6 +35,20 @@ int main(){
 	Game SimpGame(std::move(mode), gridSize, gridSize);
 	SimpGame.start();
 	
+
+
+
+
+
+
+
+	return 0;
+
+
+
+
+
+
 
 
 
@@ -369,6 +370,6 @@ int main(){
 //		//display screen
 //		window.display();
 
-	return 0;
+
 
 };

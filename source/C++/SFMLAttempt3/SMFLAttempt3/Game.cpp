@@ -233,7 +233,7 @@ void Game::handleEvents() {
 
 	float width = grid.getWidth();
 	float height = grid.getHeight();
-
+	
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
 			//std::cout << "Game is open...\n" << std::endl;
@@ -245,6 +245,8 @@ void Game::handleEvents() {
 			}
 			if (event.type == sf::Event::Resized) {
 				//on resize update the window area / size
+			
+
 				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
 				window.setView(sf::View(visibleArea));
 
@@ -313,7 +315,7 @@ void Game::handleInput() {
 			GeneralLabel.set_labelColor("Cyan");
 			SimpGame = true;
 			GenGame = false;
-			std::cout << "simp gameee" << std::endl;
+			std::cout << "simple game Loading" << std::endl;
 			std::cout << SimpGame << std::endl;
 			Player1_turn = true;
 			Player2_turn = false;
@@ -329,7 +331,7 @@ void Game::handleInput() {
 			GeneralLabel.set_labelColor("Green");
 			SimpGame = false;
 			GenGame = true;
-			std::cout << "gen gameee" << std::endl;
+			std::cout << "general game Loading" << std::endl;
 			Player1_turn = true;
 			Player2_turn = false;
 			grid.ResetGrid();
