@@ -94,7 +94,8 @@ void  SimpleMode::GameOverDraw(Grid& grid, int row, int col) {
 	std::cout << "Simple Game has ended in a DRAW, good game" << std::endl;
 	grid.ResetGrid();
 	setEndString("Simple Game has ended in a DRAW, good game");
-
+	GameState = false;
+	lastMoveMade = false;
 }
 
 
@@ -106,6 +107,7 @@ void SimpleMode::GameOverSos(Grid& grid, int row, int col) {
 	grid.ResetGrid();
 	setEndString("Simple Game has ended, the winner is Player: "+ std::to_string(currentPlayer) + ". Congratulations");
 	GameState = false;
+
 	
 
 

@@ -11,11 +11,9 @@
 
 
 //default constructor 
-RadioButton::RadioButton() {
+RadioButton::RadioButton() {}
 
-}
-
-void RadioButton::initRadioButton(float x, float y, float OuterRadius, float InnerRadius){
+void RadioButton::initRadioButton(float x, float y, float OuterRadius, float InnerRadius, std::string name){
 	buttonPos = sf::Vector2f(x,y);	
 	isSelected = false;
 
@@ -38,11 +36,13 @@ void RadioButton::initRadioButton(float x, float y, float OuterRadius, float Inn
 	innerCircle.setPosition(x - innerRadius, y - innerRadius);
 	isSelected = false;
 
-
+	buttonName = name;
 
 }
 
-
+std::string RadioButton:: getName() {
+	return buttonName;
+}
 //handle logic for a clicked button
 //update state of button via isSelected and make sure clicking of button happens inside the bounds of the button
 //We will pass this function x,y mouse pos and check if in bounds, if so flip selected

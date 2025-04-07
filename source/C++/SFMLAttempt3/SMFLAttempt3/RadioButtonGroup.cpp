@@ -8,10 +8,33 @@
 #include <vector>
 
 
-void RadioButtonGroup::addRadioButton(RadioButton* radioButton) {
-	buttonsInGroup.push_back(radioButton);
+void RadioButtonGroup::addRadioButton(RadioButton* button) {
+	buttonsInGroup.push_back(button);
 
 }
+
+std::string RadioButtonGroup::findSelection() {
+	std::string key;
+	for (auto& button : buttonsInGroup) {
+		if (button->getState() == true) {
+			key = button->getName();
+			return key;
+		}
+	}
+}
+
+void RadioButtonGroup::updateGroup(std::string key) {
+	for (auto& button : buttonsInGroup) {
+		if (button->getName() != key) {
+			button->setState(false);
+			button->setState(false);
+			button->setInnerColor("Transparent");
+			button->setInnerColor("Transparent");
+		}
+	}
+}
+
+
 
 void RadioButtonGroup::selectRadioButton(RadioButton* currentlySelected) {
 

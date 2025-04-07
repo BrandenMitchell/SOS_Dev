@@ -18,14 +18,14 @@
 #include "GameMode.h"
 #include "SimpleMode.h"
 #include "GeneralGame.h"
-#include "gameSelectScreen.h"
+
 
 class Game {
 
 public:
     Game(std::unique_ptr<GameMode> mode, int rows, int cols );
     void start();
-    
+    void initUI();
 
 private:
     std::unique_ptr<GameMode> mode;
@@ -36,6 +36,7 @@ private:
     bool MainMenu = true;
     bool SimpGame = false;
     bool GenGame = false;
+    float width;
     float squareSize; 
     int gridSize; 
     sf::RenderWindow window;
@@ -54,6 +55,11 @@ private:
     Label ThreebyLabel;
     Label FivebyLabel;
     Label SevenbyLabel;
+
+    Label SimpleLabelend;
+    Label GeneralLabelend;
+    Label userDirection;
+
     //Player controls labels
     Label Player1Label;
     Label Player2Label;
@@ -66,12 +72,14 @@ private:
 	RadioButton SimpleGameBtn;
 	RadioButton GeneralGameBtn;
 
+    RadioButton SimpleGameBtnend;
+    RadioButton GeneralGameBtnend;
 
 	//Game Board size Button 
 	RadioButton ThreeByThree;
     RadioButton FiveByFive;
 	RadioButton SevenBySeven;
-
+    RadioButtonGroup sizebtns;
 	////Player 1 and 2 contro
 	//p1
     RadioButton S_moveP1;
@@ -102,9 +110,15 @@ private:
     void handleInput(); // handle mouse interaction witht the game
     void updateGameLogic(); //update the game logic
     void render();  //render current game sate
-    void renderNewScreen(std::string key);
- 
-   
+    void RenderMenus(std::string key);
+    void renderMainMenu();
+    void updateSimpleUI();
+    void updateGeneralUI();
+    void renderEndScreen(std::string key);
+    void clearStatus();
+    void makingGameMoves(int row, int col, std::string gameType);
+    void checkGameEnd(std::string game);
+
 };
 
 

@@ -17,7 +17,8 @@ public:
 
 	//keeps currently selected button and unselects others in a group
 	void selectRadioButton(RadioButton* currentlySelectedBtn);
-
+	void updateGroup(std::string key);
+	std::string findSelection();
 
 
 private:

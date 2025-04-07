@@ -17,7 +17,7 @@ public:
 	//default constructor 
 	RadioButton();
 	
-	void initRadioButton(float x, float y, float OuterRadius, float InnerRadius);
+	void initRadioButton(float x, float y, float OuterRadius, float InnerRadius,std::string name);
 
 	//handle logic for a clicked button
 	//update state of button via isSelected and make sure clicking of button happens inside the bounds of the button
@@ -51,12 +51,13 @@ public:
 	float getInnerRadius();
 	sf::Vector2f getPosition();
 	bool getState();
+	std::string getName();
 
 private:
 	//inner and outer circle objects for the radio buttons
 	sf::CircleShape outerCircle;
 	sf::CircleShape innerCircle;
-	
+	std::string buttonName;
 	//Radio button position
 	sf::Vector2f buttonPos;
 

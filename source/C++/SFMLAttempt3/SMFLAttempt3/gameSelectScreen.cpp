@@ -8,8 +8,8 @@ GameSelectionScene::GameSelectionScene() {
 	//init the ui elements 
 	titleLabel.initLabel(300, 300, "SOS GAME", "cyan", 60);
 	uiText.initLabel(300, 380, "Choose a Game Mode !", "cyan", 60);
-	SimpleGame.initRadioButton(300, 400, 18, 14);
-	GeneralGame.initRadioButton(400, 400, 18, 14);
+	SimpleGame.initRadioButton(300, 400, 18, 14,"simpleGamebtn");
+	GeneralGame.initRadioButton(400, 400, 18, 14,"generalGamebtn");
 	sceneEnds = false;
 	SimpleLabel.initLabel(280, 400, "Simple Game", "white", 50);
 	GeneralLabel.initLabel(380, 400, "General Game", "white", 50);
