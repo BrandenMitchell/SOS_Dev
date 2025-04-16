@@ -25,7 +25,12 @@ Game::Game(std::unique_ptr<GameMode> mode, int rows, int cols)
 
 
 
-void Game::initUI() {
+void Game::initUI() {	
+	initLabels();
+	initUIButtons();
+}
+
+void Game::initLabels() {
 	//ui labels init
 	TitleLable.initLabel(800, 23, "SOS GAME", "Cyan", 60);
 	SimpleLabel.initLabel(60, 23, "Simple Game", "White", 55);
@@ -42,33 +47,44 @@ void Game::initUI() {
 	Player1O.initLabel(63, 320, "O", "White", 40);
 	Player2O.initLabel(163, 320, "O", "White", 40);
 
-	SimpleGameBtn.initRadioButton(43, 60, 13, 8,"simpleGamebtn");
-	GeneralGameBtn.initRadioButton(43, 100, 13, 8,"generalGamebtn");
+	HumanLabelP1.initLabel(63, 410, "Human", "White", 25);
+	HumanLabelP2.initLabel(199, 410, "Human", "White", 25);
+	ComputerLabelP1.initLabel(63, 480, "Computer", "Magenta", 25);
+	ComputerLabelP2.initLabel(197, 480, "Computer", "Magenta", 25);
 
+}
+void Game::initUIButtons() {
+	SimpleGameBtn.initRadioButton(43, 60, 13, 8, "simpleGamebtn");
+	GeneralGameBtn.initRadioButton(43, 100, 13, 8, "generalGamebtn");
 
-	ThreeByThree.initRadioButton(43, 160, 11, 8,"threebythree");
-	FiveByFive.initRadioButton(143, 160, 11, 8,"fivebyfive");
-	SevenBySeven.initRadioButton(243, 160, 11, 8,"sevenbyseven");
+	ThreeByThree.initRadioButton(43, 160, 11, 8, "threebythree");
+	FiveByFive.initRadioButton(143, 160, 11, 8, "fivebyfive");
+	SevenBySeven.initRadioButton(243, 160, 11, 8, "sevenbyseven");
 
 	sizebtns.addRadioButton(&ThreeByThree);
 	sizebtns.addRadioButton(&FiveByFive);
 	sizebtns.addRadioButton(&SevenBySeven);
 
-	S_moveP1.initRadioButton(43, 280, 11, 8,"p1S");
+	S_moveP1.initRadioButton(43, 280, 11, 8, "p1S");
 	O_moveP1.initRadioButton(43, 350, 11, 8, "p1O");
+	HumanBtnP1.initRadioButton(43, 420, 11, 8, "p1H");
+	ComputerBtnP1.initRadioButton(43, 480, 11, 8, "p1C");
+
+	/*Player1BtnGroup.addRadioButton(&HumanBtnP1);
+	Player1BtnGroup.addRadioButton(&ComputerBtnP1);*/
 	Player1BtnGroup.addRadioButton(&S_moveP1);
 	Player1BtnGroup.addRadioButton(&O_moveP1);
+
 	S_moveP2.initRadioButton(143, 280, 11, 8, "p2S");
 	O_moveP2.initRadioButton(143, 350, 11, 8, "p2O");
+	HumanBtnP2.initRadioButton(183, 420, 11, 8, "p2H");
+	ComputerBtnP2.initRadioButton(183, 480, 11, 8, "p2C");
 
+	/*Player2BtnGroup.addRadioButton(&HumanBtnP2);
+	Player2BtnGroup.addRadioButton(&ComputerBtnP2);*/
 	Player2BtnGroup.addRadioButton(&S_moveP2);
 	Player2BtnGroup.addRadioButton(&O_moveP2);
-
-
-
 }
-
-
 
 void Game::start() {
 	std::cout << "Game is Loading...\n" << std::endl;
@@ -310,62 +326,260 @@ void Game::checkGameEnd(std::string game) {
 			GeneralGameBtn.setState(false);
 			GameRunning = false;
 			generalEnd = true;
+			
 		}
 	}
+}
+void Game::validateMove(int row, int col, std::string gameType, std::string key , int currPlayer) {
+	if (grid.getCellState(row, col) == 0) {
+		if (gameType == "simple") {
+			simpleGame.makeMove(grid, row, col, key, currPlayer, gridSize);
+
+			checkGameEnd("simple");
+		}
+		else if (gameType == "general") {
+			generalGame.makeMove(grid, row, col, key, currPlayer, gridSize);
+
+			checkGameEnd("general");
+		}
+	}
+
+	if (Player1_turn) {
+		Player1_turn = false;
+		Player2_turn = true;
+	}
+	else {
+		Player2_turn = false;
+		Player1_turn = true;
+	}
+}
+
+
+void Game::playerOneMoves(int row, int col, std::string gameType) {
+	std::string key = Player1BtnGroup.findSelection();
+	if (key == "p1S") {
+		key = "s";
+	}
+	else if (key == "p1O") {
+		key = "o";
+	}
+	
+	if (!Player1IsHuman) {
+		std::cout << "player option chosen: bot" << std::endl;
+		std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
+		Bot Player1Bot(gameMode);
+		if (gameType == "simple") {
+			Player1Bot.botMakeMove(grid, 1, gridSize);
+			if (Player1_turn) {
+				Player1_turn = false;
+				Player2_turn = true;
+			}
+			else {
+				Player2_turn = false;
+				Player1_turn = true;
+			}
+		}
+		else if (gameType == "general") {
+			gameMode = std::make_unique<GeneralMode>();
+			Player1Bot.setGameMode(gameMode);
+			Player1Bot.botMakeMove(grid, 1, gridSize);
+			if (Player1_turn) {
+				Player1_turn = false;
+				Player2_turn = true;
+			}
+			else {
+				Player2_turn = false;
+				Player1_turn = true;
+			}
+		}
+		
+	}
+	else {
+		validateMove(row, col, gameType, key, 1);
+	}
+	
+	
+
+	
+}
+
+void Game::playerTwoMoves(int row, int col, std::string gameType) {
+	std::string key = Player2BtnGroup.findSelection();
+	if (key == "p2S") {
+		key = "s";
+	}
+	else if (key == "p2O") {
+		key = "o";
+	}
+	if (!Player2IsHuman) {
+		std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
+		Bot Player2Bot(gameMode);
+		if (gameType == "simple") {
+			Player2Bot.botMakeMove(grid, 2, gridSize);
+			if (Player1_turn) {
+				Player1_turn = false;
+				Player2_turn = true;
+			}
+			else {
+				Player2_turn = false;
+				Player1_turn = true;
+			}
+		}
+		else if (gameType == "general") {
+			gameMode = std::make_unique<GeneralMode>();
+			Player2Bot.setGameMode(gameMode);
+			Player2Bot.botMakeMove(grid, 2, gridSize);
+			if (Player1_turn) {
+				Player1_turn = false;
+				Player2_turn = true;
+			}
+			else {
+				Player2_turn = false;
+				Player1_turn = true;
+			}
+		}
+	
+		
+	}
+	else {
+		validateMove(row, col, gameType, key, 2);
+	}
+	
+
 }
 
 void Game::makingGameMoves(int row, int col,std::string gameType) {
 	std::string key;
-	if (Player1_turn == true) {
-		key = Player1BtnGroup.findSelection();
-		if (key == "p1S") {
-			key = "s";
-		}
-		else if (key == "p1O") {
-			key = "o";
-		}
-		if (grid.getCellState(row, col) == 0) {
-			if (gameType == "simple") {
-				simpleGame.makeMove(grid, row, col, key, 1, gridSize);
-				checkGameEnd("simple");
-			}
-			else if (gameType == "general") {
-				generalGame.makeMove(grid, row, col, key, 1, gridSize);
-				checkGameEnd("general");
-			}
-		}
+	
+	if (Player1_turn) {
+		playerOneMoves(row, col, gameType);
+		std::cout << "Current Player 1 turn" << std::endl;
+		
 
-		Player1_turn = false;
-		Player2_turn = true;
 	}
+	else if (Player2_turn) {
+		playerTwoMoves(row, col, gameType);
+		std::cout << "Current Player 2 turn" << std::endl;
+		 
 
-	//player 2's turn
-	else {
-		key = Player2BtnGroup.findSelection();
-		if (key == "p2S") {
-			key = "s";
-		}
-		else if (key == "p2O") {
-			key = "o";
-		}
-		if (grid.getCellState(row, col) == 0) {
-			if (gameType == "simple") {
-				simpleGame.makeMove(grid, row, col, key, 2, gridSize);
-				checkGameEnd("simple");
-			}
-			else if (gameType == "general") {
-				generalGame.makeMove(grid, row, col, key, 2, gridSize);
-				checkGameEnd("general");
-			}
-		}
-		//more stuff up here
-		Player2_turn = false;
-		Player1_turn = true;
 	}
-
-
+	
+	
 }
 
+//when  mouse input is detected , look for updates in the game buttons (simple and General) 
+void Game::updateGameButtons(sf::Vector2i mousePos) {
+	if (SimpleGameBtn.handleClick(mousePos.x, mousePos.y)) {
+		// Ensure only one button is active at a time
+		updateSimpleUI();
+
+	}
+	else if (GeneralGameBtn.handleClick(mousePos.x, mousePos.y)) {
+		updateGeneralUI();
+	}
+	//update text colors 
+	if (!SimpleGameBtn.getState()) {
+		SimpleLabel.set_labelColor("White");
+
+	}
+	if (!GeneralGameBtn.getState()) {
+		GeneralLabel.set_labelColor("Cyan");
+
+	}
+}
+
+
+//when  mouse input is detected , look for updates in the game size buttons
+void Game::updateSizeButtons(sf::Vector2i mousePos) {
+
+	// Ensure only one button is active at a time
+	if (ThreeByThree.handleClick(mousePos.x, mousePos.y)) {
+		sizebtns.updateGroup("threebythree");
+		ThreebyLabel.set_labelColor("White");
+		gridSize = 3.f;
+		clearStatus();
+		squareSize = width / gridSize;
+	}
+	else if (FiveByFive.handleClick(mousePos.x, mousePos.y)) {
+		sizebtns.updateGroup("fivebyfive");
+		FivebyLabel.set_labelColor("White");
+		gridSize = 5.f;
+		clearStatus();
+
+		squareSize = width / gridSize;
+
+	}
+	else if (SevenBySeven.handleClick(mousePos.x, mousePos.y)) {
+		sizebtns.updateGroup("sevenbyseven");
+		SevenbyLabel.set_labelColor("White");
+		gridSize = 7.f;
+		clearStatus();
+		squareSize = width / gridSize;
+	}
+	if (!ThreeByThree.getState()) {
+		ThreebyLabel.set_labelColor("Magenta");
+	}
+	if (!FiveByFive.getState()) {
+		FivebyLabel.set_labelColor("Red");
+	}
+	if (!SevenBySeven.getState()) {
+		SevenbyLabel.set_labelColor("Yellow");
+	}
+}
+
+
+//when  mouse input is detected , look for updates in the Player move buttons
+void Game::updatePlayerMoveUI(sf::Vector2i mousePos) {
+	//Making a move 
+	if (S_moveP1.handleClick(mousePos.x, mousePos.y)) {
+		O_moveP1.setState(false);
+		O_moveP1.setInnerColor("Transparent");
+	}
+	else if (O_moveP1.handleClick(mousePos.x, mousePos.y)) {
+		S_moveP1.setState(false);
+		S_moveP1.setInnerColor("Transparent");
+	}
+	else if (S_moveP2.handleClick(mousePos.x, mousePos.y)) {
+		O_moveP2.setState(false);
+		O_moveP2.setInnerColor("Transparent");
+	}
+	else if (O_moveP2.handleClick(mousePos.x, mousePos.y)) {
+		S_moveP2.setState(false);
+		S_moveP2.setInnerColor("Transparent");
+	}
+
+	if (HumanBtnP1.handleClick(mousePos.x, mousePos.y)) {
+		ComputerBtnP1.setState(false);
+		ComputerBtnP1.setInnerColor("Transparent");
+		Player1IsHuman = true;
+
+	}
+	else if (HumanBtnP2.handleClick(mousePos.x, mousePos.y)) {
+		ComputerBtnP2.setState(false);
+		ComputerBtnP2.setInnerColor("Transparent");
+		Player2IsHuman = true;
+
+	}
+	else if (ComputerBtnP1.handleClick(mousePos.x, mousePos.y)) {
+		HumanBtnP1.setState(false);
+		HumanBtnP1.setInnerColor("Transparent");
+		Player1IsHuman = false;
+
+
+	}
+	else if (ComputerBtnP2.handleClick(mousePos.x, mousePos.y)){
+		HumanBtnP2.setState(false);
+		HumanBtnP2.setInnerColor("Transparent");
+		Player2IsHuman = false;
+
+	}
+}
+
+void Game::updateUIOnMouseInput(sf::Vector2i mousePos) {
+	updateGameButtons(mousePos);
+	updateSizeButtons(mousePos);
+	updatePlayerMoveUI(mousePos);
+}
 
 
 // handle mouse interaction with the game
@@ -374,75 +588,8 @@ void Game::handleInput() {
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-
-		if (SimpleGameBtn.handleClick(event.mouseButton.x, event.mouseButton.y)) {
-			// Ensure only one button is active at a time
-			updateSimpleUI();
-
-		}
-		else if (GeneralGameBtn.handleClick(event.mouseButton.x, event.mouseButton.y)) {
-			updateGeneralUI();
-		}
-		//update text colors 
-		if (!SimpleGameBtn.getState()) {
-			SimpleLabel.set_labelColor("White");
-
-		}
-		if (!GeneralGameBtn.getState()) {
-			GeneralLabel.set_labelColor("Cyan");
-
-		}
-
-		// Ensure only one button is active at a time
-		if (ThreeByThree.handleClick(mousePos.x, mousePos.y)) {
-			sizebtns.updateGroup("threebythree");
-			ThreebyLabel.set_labelColor("White");
-			gridSize = 3.f;
-			clearStatus();
-			squareSize = width / gridSize;
-		}
-		else if (FiveByFive.handleClick(mousePos.x, mousePos.y)) {
-			sizebtns.updateGroup("fivebyfive");
-			FivebyLabel.set_labelColor("White");
-			gridSize = 5.f;
-			clearStatus();
-			
-			squareSize = width / gridSize;
-
-		}
-		else if (SevenBySeven.handleClick(mousePos.x, mousePos.y)) {
-			sizebtns.updateGroup("sevenbyseven");
-			SevenbyLabel.set_labelColor("White");
-			gridSize = 7.f;
-			clearStatus();
-			squareSize = width / gridSize;
-		}
-		if (!ThreeByThree.getState()) {
-			ThreebyLabel.set_labelColor("Magenta");
-		}
-		if (!FiveByFive.getState()) {
-			FivebyLabel.set_labelColor("Red");
-		}
-		if (!SevenBySeven.getState()) {
-			SevenbyLabel.set_labelColor("Yellow");
-		}
-		//Making a move 
-		if (S_moveP1.handleClick(mousePos.x, mousePos.y)) {
-			O_moveP1.setState(false);
-			O_moveP1.setInnerColor("Transparent");
-		}
-		else if (O_moveP1.handleClick(mousePos.x, mousePos.y)) {
-			S_moveP1.setState(false);
-			S_moveP1.setInnerColor("Transparent");
-		}
-		else if (S_moveP2.handleClick(mousePos.x, mousePos.y)) {
-			O_moveP2.setState(false);
-			O_moveP2.setInnerColor("Transparent");
-		}
-		else if (O_moveP2.handleClick(mousePos.x, mousePos.y)) {
-			S_moveP2.setState(false);
-			S_moveP2.setInnerColor("Transparent");
-		}
+		updateUIOnMouseInput(mousePos);
+		
 
 		if (mousePos.x >= CenterGameBoardX && mousePos.x <= CenterGameBoardX + gridSize * squareSize && mousePos.y >= CenterGameBoardY && mousePos.y <= CenterGameBoardY + gridSize * squareSize) {
 			int col = (mousePos.x - CenterGameBoardX) / squareSize;
@@ -450,7 +597,7 @@ void Game::handleInput() {
 			std::string key = "";
 			if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
 				std::cout << "Mouse is at: row = " << row << ", col = " << col << std::endl;
-				if (SimpGame == true) {
+				if (SimpGame == true ) {
 					//Simple game is mode
 					makingGameMoves(row, col, "simple");
 				}
@@ -506,12 +653,17 @@ void Game::render() {
 	Player2S.draw_Label(window);
 	Player1O.draw_Label(window);
 	Player2O.draw_Label(window);
+	HumanLabelP1.draw_Label(window);
+	HumanLabelP2.draw_Label(window);
+	ComputerLabelP1.draw_Label(window);
+	ComputerLabelP2.draw_Label(window);
 	TitleLable.draw_Label(window);
 	SimpleLabel.draw_Label(window);
 	GeneralLabel.draw_Label(window);
 	ThreebyLabel.draw_Label(window);
 	FivebyLabel.draw_Label(window);
 	SevenbyLabel.draw_Label(window);
+
 	SimpleGameBtn.drawButton(window);
 	GeneralGameBtn.drawButton(window);
 	ThreeByThree.drawButton(window);
@@ -521,7 +673,10 @@ void Game::render() {
 	O_moveP1.drawButton(window);
 	S_moveP2.drawButton(window);
 	O_moveP2.drawButton(window);
-
+	HumanBtnP1.drawButton(window);
+	HumanBtnP2.drawButton(window);
+	ComputerBtnP1.drawButton(window);
+	ComputerBtnP2.drawButton(window);
 	
 	
 	window.display();

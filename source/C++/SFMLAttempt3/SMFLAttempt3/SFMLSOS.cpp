@@ -26,7 +26,7 @@
 //MainLoop
 int main(){
 	
-	float gridSize = 5.f; //game board dimensions 3x3, 6x6 etc
+	float gridSize = 7.f; //game board dimensions 3x3, 6x6 etc
 	float gridWidth = 800; //game board width
 	float gridHeight = 800; //game board height
 

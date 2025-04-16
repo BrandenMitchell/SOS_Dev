@@ -18,7 +18,7 @@
 #include "GameMode.h"
 #include "SimpleMode.h"
 #include "GeneralGame.h"
-
+#include "ComputerBot.h"
 
 class Game {
 
@@ -26,6 +26,15 @@ public:
     Game(std::unique_ptr<GameMode> mode, int rows, int cols );
     void start();
     void initUI();
+    void initUIButtons();
+    void initLabels();
+    void updateUIOnMouseInput(sf::Vector2i mousePos);
+    void updateGameButtons(sf::Vector2i mousePos);
+    void updateSizeButtons(sf::Vector2i mousePos);
+    void updatePlayerMoveUI(sf::Vector2i mousePos);
+    void playerOneMoves(int row, int col, std::string gameType);
+    void playerTwoMoves(int row, int col, std::string gameType);
+    void validateMove(int row, int col, std::string gameType, std::string key, int currPlayer);
 
 private:
     std::unique_ptr<GameMode> mode;
@@ -48,6 +57,9 @@ private:
     bool Player2_turn = false;
     std::string endText = "";
 
+    bool Player1IsHuman = true;
+    bool Player2IsHuman = true;
+
     //UI labels
     Label TitleLable;
     Label SimpleLabel;
@@ -65,6 +77,13 @@ private:
     Label Player2Label;
     Label Player1S;
     Label Player2S;
+
+    Label HumanLabelP1;
+    Label ComputerLabelP1;
+    
+    Label HumanLabelP2;
+    Label ComputerLabelP2;
+    
     Label Player1O;
     Label Player2O;
     Label GameEnded;
@@ -84,10 +103,14 @@ private:
 	//p1
     RadioButton S_moveP1;
     RadioButton O_moveP1;
+    RadioButton HumanBtnP1;
+    RadioButton ComputerBtnP1;
+
 	//p2
     RadioButton S_moveP2;
     RadioButton O_moveP2;
-
+    RadioButton HumanBtnP2;
+    RadioButton ComputerBtnP2;
 	//game mode btn group
 	RadioButtonGroup ModebtnGroup;
 	

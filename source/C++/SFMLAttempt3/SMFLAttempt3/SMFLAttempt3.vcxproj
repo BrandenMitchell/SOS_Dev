@@ -204,6 +204,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="catch_amalgamated.cpp" />
+    <ClCompile Include="ComputerBot.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameSelectScreen.cpp" />
     <ClCompile Include="GeneralGame.cpp" />
@@ -228,6 +229,7 @@
     <ClCompile Include="UI_Label.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComputerBot.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMode.h" />
     <ClInclude Include="gameSelectScreen.h" />

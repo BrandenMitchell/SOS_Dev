@@ -30,7 +30,8 @@ public:
 	int getCellState(int row, int col) const;
 
 	//Gives me state of entire grid
-
+	void setS_OColor(std::string color);
+	sf::Color get_Color(const std::string& color);
 	std::vector<std::vector<int>> getGridVect();
 
 	std::vector<int> getDimensions();
@@ -47,7 +48,7 @@ private:
 	//rows, cols will be given to determine the size of the game board, the value is what to make the value of each cell (default is 0 which is none)
 	int rows, cols;
 	float width, height;
-
+	sf::Text text;
 	// in my gridState 0 is none , 1 is S, 2 is O 
 	int value = 0;
 	//this is a vector of integers called grid (will hold game board state)

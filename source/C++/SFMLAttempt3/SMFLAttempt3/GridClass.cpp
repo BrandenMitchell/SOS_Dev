@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 #include "GridClass.h"
-
+#include <map>
 //grid class 
 
 //constructor here 
@@ -21,8 +21,10 @@ Grid::Grid(int rows, int cols,float width, float height) : rows(rows), cols(cols
 	if (!font.loadFromFile("include/Pixellettersfull-BnJ5.ttf")) {
 		std::cerr << "Error loading font!" << std::endl;
 	}
-
-
+	text.setFillColor(sf::Color::White);
+	text.setFont(font);
+	text.setCharacterSize(70);
+	
 }
 
 
@@ -127,21 +129,48 @@ void Grid::drawCells(sf::RenderWindow& window, float squareSize, float gridSize,
 	//call func to draw S and O 
 	drawS_O(window, squareSize, centerX, centerY);
 
+}
+
+sf::Color Grid::get_Color(const std::string& color) {
+	static const std::map<std::string, sf::Color> colorMap = {
+		{"Red", sf::Color::Red},
+		{"Green", sf::Color::Green},
+		{"Blue", sf::Color::Blue},
+		{"Black", sf::Color::Black},
+		{"White", sf::Color::White},
+		{"Yellow", sf::Color::Yellow},
+		{"Magenta", sf::Color::Magenta},
+		{"Cyan", sf::Color::Cyan}
+
+	};
+	auto it = colorMap.find(color);
+	if (it != colorMap.end()) {
+		return it->second;
+	}
+	else {
+		// Return a default color (e.g., black) if the color is not found
+		return sf::Color::Black;
+	}
+
+}
+void Grid::setS_OColor(std::string color) {
+	sf::Color S_OCol = get_Color(color);
+	text.setFillColor(S_OCol);
 
 }
 
+
 //draw S and O 
 void Grid::drawS_O(sf::RenderWindow& window, float squareSize, float centerX, float centerY) {
-	sf::Text text("", font, 50);
+	
 	for (int row = 0; row < rows; row++) {
 
 		for (int col = 0; col < cols; col++) {
 			//equal to 1 we draw S
 			sf::Vector2f cellPos(centerX + col * squareSize, centerY + row * squareSize);
-
 			if (grid[row][col] == 1) {
 				text.setString("S");
-				text.setFillColor(sf::Color::Red);
+				text.setFillColor(sf::Color::Green);
 				text.setPosition(cellPos + sf::Vector2f(squareSize / 4, squareSize / 4));
 				window.draw(text);
 
@@ -149,11 +178,12 @@ void Grid::drawS_O(sf::RenderWindow& window, float squareSize, float centerX, fl
 			//equal to 2 we draw O
 			else if (grid[row][col] == 2) {
 				text.setString("O");
-				text.setFillColor(sf::Color::Blue);
+				text.setFillColor(sf::Color::Red);
 				text.setPosition(cellPos + sf::Vector2f(squareSize / 4, squareSize / 4));
 				window.draw(text);
 
 			}
+			
 		}
 	}
 
