@@ -16,9 +16,9 @@ public:
 	void makeMove(Grid& grid, int row, int col, std::string key, int currPlayersTurn, int gridSize) override; //handles s and o game moves , key == is s or o move 
 	bool isSOS(Grid& grid, int row, int col, int gridSize) override; //check if sos is made 
 	bool isLastMove(Grid& grid, int row, int col, int gridSize) override;
-	bool getGameState();
+	bool getGameState() override;
 	void setEndString(std::string endtext);
-	std::string getEndString();
+	std::string getEndString() override;
 
 	void resetGame() override; 
 

@@ -13,12 +13,13 @@ public:
 	Bot(std::shared_ptr<GameMode> modeType);
 
 	void botMakeMove(Grid& grid, int currPlayersTurn, int gridSize);
-	void endGameBot();
+	bool isBotGameOver();
 	void resetGame();
 	void isLastMove(); 
 	std::string pickLetter();
 	sf::Vector2i chooseGridSpace(Grid& grid, int gridSize);
-
+	std::string getEndString();
+	
 	void setGameMode(std::shared_ptr<GameMode> newMode);
 
 

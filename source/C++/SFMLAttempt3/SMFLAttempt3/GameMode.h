@@ -19,7 +19,8 @@ public:
 	virtual bool isSOS(Grid& grid, int row, int col, int gridSize) = 0; //check if sos is made 
 	virtual bool isLastMove(Grid& grid, int row, int col, int gridSize) = 0; //check if last possible move is made
 	virtual void resetGame() =0 ; //reset game state
-
+	virtual bool getGameState() = 0;
+	virtual std::string getEndString() = 0;
 
 	//destructor
 	virtual ~GameMode() = default;

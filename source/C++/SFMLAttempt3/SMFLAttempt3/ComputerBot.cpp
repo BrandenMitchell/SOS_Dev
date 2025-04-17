@@ -58,12 +58,19 @@ void Bot::botMakeMove(Grid& grid, int currPlayersTurn, int gridSize) {
 	std::cout << "random pos selected" << std::endl;
 
 	mode->makeMove(grid, gridPos.x, gridPos.y, key, currPlayersTurn, gridSize);
-
+	
 }
-void Bot::endGameBot() {
-
+bool Bot::isBotGameOver() {
+	return mode->getGameState();
 }
 void Bot::resetGame() {
+	mode->resetGame();
+}
+
+std::string Bot::getEndString() {
+	std::string endstr = mode->getEndString();
+
+	return endstr;
 
 }
 void Bot::isLastMove() {

@@ -20,6 +20,9 @@ Game::Game(std::unique_ptr<GameMode> mode, int rows, int cols)
 	centerX = window.getSize().x / 2.f - 60;
 	squareSize = width / rows;
 	initUI();
+	
+	botEndString = "";
+	
 
 }
 
@@ -138,6 +141,9 @@ void Game::RenderMenus(std::string key) {
 		renderEndScreen("general");
 
 	}
+	else if (key == "bot-end") {
+
+	}
 }
 
 
@@ -162,10 +168,13 @@ void Game::updateSimpleUI() {
 	MainMenu = false;
 
 	simpleGame.resetGame();
+	
 
 
 }
-
+void Game::resetBots(Bot PlayerBot) {
+	PlayerBot.resetGame();
+}
 
 void Game::updateGeneralUI() {
 	SimpleGameBtnend.setState(false);
@@ -215,13 +224,18 @@ void Game::renderEndScreen(std::string key) {
 	Label gameOverG;
 	std::string userText = "Press Space to play again!";
 	std::string gameOverText;
-
-	if (key == "simple") {
-		gameOverText = simpleGame.getEndString();
+	if (botPresent and botWon) {
+		gameOverText = botEndString;
 	}
-	else if (key == "general") {
-		gameOverText = generalGame.getEndString();
+	else {
+		if (key == "simple") {
+			gameOverText = simpleGame.getEndString();
+		}
+		else if (key == "general") {
+			gameOverText = generalGame.getEndString();
+		}
 	}
+	
 
 	gameOverG.initLabel(300, 300, gameOverText, "White", 50);
 	userDirection.set_labelText(userText);
@@ -247,6 +261,8 @@ void Game::renderEndScreen(std::string key) {
 			simpleEnd = false;
 			SimpGame = false;
 			GenGame = false;
+			botPresent = false;
+			botWon = false;
 			MainMenu = true;
 			if (key == "general") {
 				updateGeneralUI();
@@ -309,9 +325,13 @@ void Game::handleEvents() {
 }
 
 void Game::checkGameEnd(std::string game) {
+	std::cout << "Did we even check " << std::endl;
 	if (game == "simple") {
+		
+
 		if (!simpleGame.getGameState()) {
 			//the simple game has ended. 
+			std::cout << "Simple game over" << std::endl;
 			SimpGame = false;
 			SimpleGameBtn.setState(false);
 			GameRunning = false;
@@ -320,8 +340,11 @@ void Game::checkGameEnd(std::string game) {
 	}
 	
 	if (game == "general") {
+		
+
 		if (!generalGame.getGameState()) {
 			//the general game has ended. 
+			std::cout << "general game over" << std::endl;
 			GenGame = false;
 			GeneralGameBtn.setState(false);
 			GameRunning = false;
@@ -330,9 +353,48 @@ void Game::checkGameEnd(std::string game) {
 		}
 	}
 }
+
+void Game::checkGameEndBot(Bot PlayerBot, std::string game) {
+	std::cout << "Did we even check BOT" << std::endl;
+	if (game == "simple") {
+
+		if (!PlayerBot.isBotGameOver()) {
+			//the simple game has ended. 
+			std::cout << "Simple game over BOT" << std::endl;
+			botWon = true;
+			botEndString = PlayerBot.getEndString();
+			SimpGame = false;
+			SimpleGameBtn.setState(false);
+			GameRunning = false;
+			simpleEnd = true;
+			PlayerBot.resetGame();
+
+		}
+	}
+
+	if (game == "general") {
+		if (!PlayerBot.isBotGameOver()) {
+			//the general game has ended. 
+
+			std::cout << "general game over BOT" << std::endl;
+			botWon = true;
+
+			botEndString = PlayerBot.getEndString();
+			GenGame = false;
+			GeneralGameBtn.setState(false);
+			GameRunning = false;
+			generalEnd = true;
+			PlayerBot.resetGame();
+
+
+		}
+	}
+}
 void Game::validateMove(int row, int col, std::string gameType, std::string key , int currPlayer) {
+	std::cout << "we are validating the moves" << std::endl;
 	if (grid.getCellState(row, col) == 0) {
 		if (gameType == "simple") {
+
 			simpleGame.makeMove(grid, row, col, key, currPlayer, gridSize);
 
 			checkGameEnd("simple");
@@ -366,10 +428,14 @@ void Game::playerOneMoves(int row, int col, std::string gameType) {
 	
 	if (!Player1IsHuman) {
 		std::cout << "player option chosen: bot" << std::endl;
-		std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
-		Bot Player1Bot(gameMode);
+		botPresent = true;
 		if (gameType == "simple") {
+			std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
+			Bot Player1Bot(gameMode);
 			Player1Bot.botMakeMove(grid, 1, gridSize);
+			checkGameEndBot(Player1Bot, gameType);
+
+
 			if (Player1_turn) {
 				Player1_turn = false;
 				Player2_turn = true;
@@ -380,9 +446,12 @@ void Game::playerOneMoves(int row, int col, std::string gameType) {
 			}
 		}
 		else if (gameType == "general") {
-			gameMode = std::make_unique<GeneralMode>();
-			Player1Bot.setGameMode(gameMode);
+			std::shared_ptr<GameMode> gameMode = std::make_unique<GeneralMode>();
+			Bot Player1Bot(gameMode);
 			Player1Bot.botMakeMove(grid, 1, gridSize);
+			checkGameEndBot(Player1Bot, gameType);
+
+
 			if (Player1_turn) {
 				Player1_turn = false;
 				Player2_turn = true;
@@ -398,9 +467,6 @@ void Game::playerOneMoves(int row, int col, std::string gameType) {
 		validateMove(row, col, gameType, key, 1);
 	}
 	
-	
-
-	
 }
 
 void Game::playerTwoMoves(int row, int col, std::string gameType) {
@@ -412,10 +478,15 @@ void Game::playerTwoMoves(int row, int col, std::string gameType) {
 		key = "o";
 	}
 	if (!Player2IsHuman) {
-		std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
-		Bot Player2Bot(gameMode);
+		botPresent = true;
+
 		if (gameType == "simple") {
+			std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
+			Bot Player2Bot(gameMode);
 			Player2Bot.botMakeMove(grid, 2, gridSize);
+			checkGameEndBot(Player2Bot, gameType);
+
+
 			if (Player1_turn) {
 				Player1_turn = false;
 				Player2_turn = true;
@@ -426,9 +497,11 @@ void Game::playerTwoMoves(int row, int col, std::string gameType) {
 			}
 		}
 		else if (gameType == "general") {
-			gameMode = std::make_unique<GeneralMode>();
-			Player2Bot.setGameMode(gameMode);
+			std::shared_ptr<GameMode> gameMode = std::make_unique<GeneralMode>();
+			Bot Player2Bot(gameMode);
 			Player2Bot.botMakeMove(grid, 2, gridSize);
+			checkGameEndBot(Player2Bot, gameType);
+
 			if (Player1_turn) {
 				Player1_turn = false;
 				Player2_turn = true;
@@ -452,16 +525,15 @@ void Game::makingGameMoves(int row, int col,std::string gameType) {
 	std::string key;
 	
 	if (Player1_turn) {
-		playerOneMoves(row, col, gameType);
 		std::cout << "Current Player 1 turn" << std::endl;
-		
-
+		playerOneMoves(row, col, gameType);
+		checkGameEnd(gameType);
 	}
 	else if (Player2_turn) {
-		playerTwoMoves(row, col, gameType);
 		std::cout << "Current Player 2 turn" << std::endl;
-		 
-
+		playerTwoMoves(row, col, gameType);
+		checkGameEnd(gameType);
+	
 	}
 	
 	

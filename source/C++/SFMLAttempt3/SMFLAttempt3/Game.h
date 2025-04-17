@@ -59,7 +59,10 @@ private:
 
     bool Player1IsHuman = true;
     bool Player2IsHuman = true;
-
+    bool botPresent = false;
+    bool botWon = false;
+    std::string botEndString;
+    
     //UI labels
     Label TitleLable;
     Label SimpleLabel;
@@ -129,6 +132,8 @@ private:
     SimpleMode simpleGame;
     GeneralMode generalGame;
 
+    
+    
     void handleEvents();
     void handleInput(); // handle mouse interaction witht the game
     void updateGameLogic(); //update the game logic
@@ -141,7 +146,8 @@ private:
     void clearStatus();
     void makingGameMoves(int row, int col, std::string gameType);
     void checkGameEnd(std::string game);
-
+    void checkGameEndBot(Bot PlayerBot, std::string game);
+    void resetBots(Bot PlayerBot);
 };
 
 
