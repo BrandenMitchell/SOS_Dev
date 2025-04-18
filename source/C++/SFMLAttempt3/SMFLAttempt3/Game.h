@@ -90,7 +90,7 @@ private:
     Label Player1O;
     Label Player2O;
     Label GameEnded;
-
+    
 	RadioButton SimpleGameBtn;
 	RadioButton GeneralGameBtn;
 
@@ -131,8 +131,9 @@ private:
    
     SimpleMode simpleGame;
     GeneralMode generalGame;
-
-    
+    std::shared_ptr<GameMode> gameMode = std::make_unique<GeneralMode>();
+    Bot Player1Bot;
+    Bot Player2Bot;
     
     void handleEvents();
     void handleInput(); // handle mouse interaction witht the game

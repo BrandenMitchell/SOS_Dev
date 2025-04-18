@@ -23,7 +23,6 @@ Game::Game(std::unique_ptr<GameMode> mode, int rows, int cols)
 	
 	botEndString = "";
 	
-
 }
 
 
@@ -166,7 +165,6 @@ void Game::updateSimpleUI() {
 	grid.ResetGrid();
 	GameRunning = true;
 	MainMenu = false;
-
 	simpleGame.resetGame();
 	
 
@@ -262,6 +260,8 @@ void Game::renderEndScreen(std::string key) {
 			SimpGame = false;
 			GenGame = false;
 			botPresent = false;
+			Player1Bot.resetGame();
+			Player2Bot.resetGame();
 			botWon = false;
 			MainMenu = true;
 			if (key == "general") {
@@ -367,7 +367,7 @@ void Game::checkGameEndBot(Bot PlayerBot, std::string game) {
 			SimpleGameBtn.setState(false);
 			GameRunning = false;
 			simpleEnd = true;
-			PlayerBot.resetGame();
+
 
 		}
 	}
@@ -384,7 +384,7 @@ void Game::checkGameEndBot(Bot PlayerBot, std::string game) {
 			GeneralGameBtn.setState(false);
 			GameRunning = false;
 			generalEnd = true;
-			PlayerBot.resetGame();
+		
 
 
 		}
@@ -431,7 +431,7 @@ void Game::playerOneMoves(int row, int col, std::string gameType) {
 		botPresent = true;
 		if (gameType == "simple") {
 			std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
-			Bot Player1Bot(gameMode);
+			Player1Bot.initBot(gameMode);
 			Player1Bot.botMakeMove(grid, 1, gridSize);
 			checkGameEndBot(Player1Bot, gameType);
 
@@ -446,8 +446,8 @@ void Game::playerOneMoves(int row, int col, std::string gameType) {
 			}
 		}
 		else if (gameType == "general") {
-			std::shared_ptr<GameMode> gameMode = std::make_unique<GeneralMode>();
-			Bot Player1Bot(gameMode);
+			std::shared_ptr<GameMode> sharedGameMode = std::shared_ptr<GameMode>(&generalGame, [](GameMode*) { /* no delete */ });
+			Player1Bot.setGameMode(sharedGameMode);
 			Player1Bot.botMakeMove(grid, 1, gridSize);
 			checkGameEndBot(Player1Bot, gameType);
 
@@ -482,7 +482,7 @@ void Game::playerTwoMoves(int row, int col, std::string gameType) {
 
 		if (gameType == "simple") {
 			std::shared_ptr<GameMode> gameMode = std::make_unique<SimpleMode>();
-			Bot Player2Bot(gameMode);
+			Player2Bot.initBot(gameMode);
 			Player2Bot.botMakeMove(grid, 2, gridSize);
 			checkGameEndBot(Player2Bot, gameType);
 
@@ -497,8 +497,8 @@ void Game::playerTwoMoves(int row, int col, std::string gameType) {
 			}
 		}
 		else if (gameType == "general") {
-			std::shared_ptr<GameMode> gameMode = std::make_unique<GeneralMode>();
-			Bot Player2Bot(gameMode);
+			std::shared_ptr<GameMode> sharedGameMode = std::shared_ptr<GameMode>(&generalGame, [](GameMode*) { /* no delete */ });
+			Player2Bot.setGameMode(sharedGameMode);
 			Player2Bot.botMakeMove(grid, 2, gridSize);
 			checkGameEndBot(Player2Bot, gameType);
 
@@ -523,17 +523,34 @@ void Game::playerTwoMoves(int row, int col, std::string gameType) {
 
 void Game::makingGameMoves(int row, int col,std::string gameType) {
 	std::string key;
-	
-	if (Player1_turn) {
-		std::cout << "Current Player 1 turn" << std::endl;
-		playerOneMoves(row, col, gameType);
-		checkGameEnd(gameType);
-	}
-	else if (Player2_turn) {
-		std::cout << "Current Player 2 turn" << std::endl;
-		playerTwoMoves(row, col, gameType);
-		checkGameEnd(gameType);
-	
+	if (gameType == "simple") {
+		if (Player1_turn) {
+			std::cout << "Current Player 1 turn" << std::endl;
+			playerOneMoves(row, col, gameType);
+			checkGameEnd(gameType);
+		}
+		else if (Player2_turn) {
+			std::cout << "Current Player 2 turn" << std::endl;
+			playerTwoMoves(row, col, gameType);
+			checkGameEnd(gameType);
+
+		}
+	}	
+	else {
+		
+		Player1Bot.initBot(gameMode);
+		Player2Bot.initBot(gameMode);
+		if (Player1_turn) {
+			std::cout << "Current Player 1 turn" << std::endl;
+			playerOneMoves(row, col, gameType);
+			checkGameEnd(gameType);
+		}
+		else if (Player2_turn) {
+			std::cout << "Current Player 2 turn" << std::endl;
+			playerTwoMoves(row, col, gameType);
+			checkGameEnd(gameType);
+
+		}
 	}
 	
 	

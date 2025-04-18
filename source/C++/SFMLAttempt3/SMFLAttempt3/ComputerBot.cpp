@@ -4,12 +4,14 @@
 
 
 
-
-Bot::Bot(std::shared_ptr<GameMode> modeType) {
-	mode = modeType;
+Bot::Bot() {
 
 }
 
+void Bot::initBot(std::shared_ptr<GameMode> modeType) {
+	mode = modeType;
+
+}
 
 
 std::string  Bot::pickLetter() {
@@ -71,9 +73,6 @@ std::string Bot::getEndString() {
 	std::string endstr = mode->getEndString();
 
 	return endstr;
-
-}
-void Bot::isLastMove() {
 
 }
 

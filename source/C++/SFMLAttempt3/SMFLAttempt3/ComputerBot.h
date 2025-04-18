@@ -9,36 +9,28 @@
 class Bot{
 
 public:
-	//default constructor , set the game mode
-	Bot(std::shared_ptr<GameMode> modeType);
+	Bot();
 
-	void botMakeMove(Grid& grid, int currPlayersTurn, int gridSize);
-	bool isBotGameOver();
-	void resetGame();
-	void isLastMove(); 
+	void initBot(std::shared_ptr<GameMode> modeType);//default constructor , set the starting gameBotmode
+	 
+	void botMakeMove(Grid& grid, int currPlayersTurn, int gridSize);//bot makes a move using the prior defined move functions of Simple and General
+	
+	bool isBotGameOver();//checks the state of the game the bot is involved in 
+
+	void resetGame();//reset bot information and game state
+	 
+	//chooose random move type and move position 
 	std::string pickLetter();
 	sf::Vector2i chooseGridSpace(Grid& grid, int gridSize);
-	std::string getEndString();
 	
-	void setGameMode(std::shared_ptr<GameMode> newMode);
+	std::string getEndString(); // Get the final string for the bots game if they win, draw 
 
-
+	void setGameMode(std::shared_ptr<GameMode> newMode); //change the gamemode dynamically 
 
 
 private:
+	
 	std::shared_ptr<GameMode> mode;
-
-
-
-//	std::string endingString = "";
-//	bool lastMoveMade = false;
-//	bool Player1Turn = true;
-//	bool Player2Turn = false;
-//	//0 for default , otherwise 1 or 2
-//	int currentPlayer = 0;
-//	// will be set to false when the game is over. 
-//	bool GameState = true;
-
 };
 
 
