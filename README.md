@@ -5,7 +5,7 @@ The project was developed as a way to practice SFML, event-driven input, state m
 Image examples below:
 
 Early Board render
-![Early SOS board](SosImages/sosEarlyBoard)
+![Early SOS board](SosImages/sosEarlyBoard.jpg)
 
 Final Board and polished pictures:
 
