@@ -4,3 +4,13 @@ The project was developed as a way to practice SFML, event-driven input, state m
 
 Image examples below:
 
+Early Board render
+![Early SOS board](SosImages/sosEarlyBoard)
+
+Final Board and polished pictures:
+
+![Board pictures with larger grid setup](SosImages/sosDev3)
+![Default final board](SosImages/sosDev1)
+![One of the End screens](SosImages/sosDev2)
+
+
