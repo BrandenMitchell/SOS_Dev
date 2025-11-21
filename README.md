@@ -9,8 +9,8 @@ Early Board render
 
 Final Board and polished pictures:
 
-![Board pictures with larger grid setup](SosImages/sosDev3)
-![Default final board](SosImages/sosDev1)
-![One of the End screens](SosImages/sosDev2)
+![Board pictures with larger grid setup](SosImages/sosDev3.png)
+![Default final board](SosImages/sosDev1.png)
+![One of the End screens](SosImages/sosDev2.png)
 
 
